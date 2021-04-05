@@ -24,7 +24,7 @@ General Commands for Psql :
 
 1) How To Create Table in Psql:
 
-     $ CREATE TABLE <table_Name> (
+     $ CREATE TABLE table_Name (
         column1 datatype(length) column_contraint,
         column2 datatype(length) column_contraint,
         column3 datatype(length) column_contraint,
@@ -33,21 +33,21 @@ General Commands for Psql :
 
 2) How to INSERT Value in Table :
 
-     $ INSERT INTO <table_Name>(column1, column2, …)
+     $ INSERT INTO table_Name(column1, column2, …)
        VALUES (value1, value2, …);
 
 
 3) How to see table :
 
-     $ select * from <tableName>
+     $ select * from tableName
 
 
 ** Now Some commands you might be needed :
 
 4) How To delete Row from Table :
 
-    $ delete from <tableName>
-    where <condition>;
+    $ delete from tableName
+    where condition;
 
 5) How to Update or modify data in a table:
 
