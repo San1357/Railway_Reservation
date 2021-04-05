@@ -25,7 +25,7 @@ class Cancel_ticket(Ticket,Search):
         print("Pnr_no:",self.Pnr_no)
         
         cur.execute("delete from traininfo where pnr_number in (%s)",([self.Pnr_no]))       
-        cur.execute("update traindetail set avail_seat = %s where train_no = %s",(self.no_of_Seat_u_wanna_book + self.info[5],self.train_no))
+        #cur.execute("update traindetail set avail_seat = %s where train_no = %s",(self.no_of_Seat_u_wanna_book + self.info[5],self.train_no))
         conn.commit()
         print("Your Ticket is  Cancelled!!!")
         print(" ThankYou !! Visit Again!! ")
