@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, request
 
-from Cancel_Ticket import Cancel_ticket
+from cancel_ticket import CancelTicket
 
 import psycopg2
 import psycopg2.extras
@@ -12,16 +12,16 @@ def hello():
     print("Welcome to Cancel Ticket Function!!")
 
 
-@app.route('/CancelTicket', methods = ['POST'])
-def CancelTicket():
+@app.route('/_cancel_ticket', methods = ['POST'])
+def _cancel_ticket():
     
     if request.method =='POST':
         req_json = request.json
-        Pnr_No = req_json['Pnr_No']
-        print(Pnr_No)
+        pnr_no = req_json['pnr_no']
+        print(pnr_no)
 
 
-        b = Cancel_ticket(Pnr_No)
+        b = CancelTicket(pnr_no)
         c = b.get_cancel_ticket()
         print(str(c))
 

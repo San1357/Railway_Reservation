@@ -1,5 +1,5 @@
 from flask import Flask,request, jsonify
-from TrainSearch import Search
+from train_search import Search
 import psycopg2
 import psycopg2.extras
 
@@ -13,17 +13,17 @@ def hel_lo():
 def search_api():
     if request.method == "POST":
         req_json = request.json
-        FRomstation = req_json['FRomstation']
-        print(FRomstation)
-        TosTation = req_json['TosTation']
-        print(TosTation)
-        DAte = req_json['DAte']
-        print(DAte)
+        from_station = req_json['from_station']
+        print(from_station)
+        to_station = req_json['to_station']
+        print(to_station)
+        date = req_json['date']
+        print(date)
 
-        a = Search(FRomstation, TosTation, DAte)
-        a.train_Search()
-        v = a.get_train_Details()
-        t = a.Train_Schedule()
+        a = Search(from_station, to_station, date)
+        a._train_search()
+        v = a.get_train_details()
+        t = a.train_schedule()
         print(v)
         
         return jsonify({"Your Details are": v,

@@ -21,29 +21,29 @@ cur = conn.cursor()
 
 
 class Search():
-    def __init__(self,Fromstation,Tostation,Date):
-        self.Fromstation = Fromstation
-        self.Tostation = Tostation
-        self.Date = Date
+    def __init__(self,from_station,to_station,date):
+        self.from_station = from_station
+        self.to_station = to_station
+        self.date = date
         self.info = []
         
         
 
-    def train_Search(self):
-        print("FROM: ",self.Fromstation)
-        print("TO: ", self.Tostation)
-        print("Date: ", self.Date)
+    def _train_search(self):
+        print("FROM: ",self.from_station)
+        print("TO: ", self.to_station)
+        print("Date: ", self.date)
         
 
 
         #global info
 
         Ls =[]
-        Ls.append(self.Fromstation)
-        Ls.append(self.Tostation)
-        Ls.append(self.Date)
+        Ls.append(self.from_station)
+        Ls.append(self.to_station)
+        Ls.append(self.date)
         print(Ls)
-        cur.execute("select * from traindetail where fromstation = %s and tostation = %s",(self.Fromstation,self.Tostation))
+        cur.execute("select * from traindetail where fromstation = %s and tostation = %s",(self.from_station,self.to_station))
         
         self.info = list(cur.fetchone())
         #self.info.append(cur.fetchone())
@@ -65,11 +65,11 @@ class Search():
         print (type(self.info[4]))
         print(type(self.info[5]))
 
-    def get_train_Details(self):
+    def get_train_details(self):
         #self.train_Search()
 
         if self.info is not None:
-            if self.info[0] == self.Fromstation and self.info[1] == self.Tostation:
+            if self.info[0] == self.from_station and self.info[1] == self.to_station:
                 print("** Here is your Train detail **")
                 print ("Train NO:",self.info[2])
                 print("Train Name:", self.info[3])
@@ -104,11 +104,11 @@ class Search():
                  
             
     
-    def Train_Schedule(self):
+    def train_schedule(self):
         #self.train_Search()
 
         if self.info is not None:
-            if self.info[0] == self.Fromstation and self.info[1] == self.Tostation: 
+            if self.info[0] == self. from_station and self.info[1] == self.to_station: 
                 print("** Train Schedule **")
                 results = self.info[6]
                 print(results)
@@ -123,16 +123,16 @@ class Search():
 
     
 
-#print("---------------Class Init started---------------")
-#x = Search("Noida", "Gorakhpur", "12-03-2021")
-#print("---------------train_Search()--------------")
-#x.train_Search()
-#print("---------------get_train_Details()--------------")
-#x.get_train_Details()
+print("---------------Class Init started---------------")
+x = Search("Noida", "Gorakhpur", "12-03-2021")
+print("---------------train_Search()--------------")
+x._train_search()
+print("---------------get_train_Details()--------------")
+x.get_train_details()
 #print("---------------seat_booking()--------------")
 #x.seat_booking()
-#print("---------------Train_Schedule()--------------")
-#x.Train_Schedule()
-
-#cur.close()
-#conn.close()
+print("---------------Train_Schedule()--------------")
+x.train_schedule()
+'''
+cur.close()
+conn.close() '''

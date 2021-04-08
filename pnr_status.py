@@ -16,8 +16,8 @@ app = Flask(__name__)
 def hello_world():
     return 'Hello, Welcome To Pnr Status Checker'
 
-@app.route('/pnrconnect/<int:a>')
-def pnrconnect(a):
+@app.route('/pnr_connect/<int:a>')
+def pnr_connect(a):
     conn =  psycopg2.connect(
             host = DB_Host, database = DB_name, user = DB_user, password = DB_pass)
 
@@ -42,7 +42,7 @@ def pnrconnect(a):
 #pnrconnect(a)
 
 
-@app.route('/Pnrconnect',methods=['GET','POST'])
+@app.route('/pnr_connect',methods=['GET','POST'])
 def pnrc():
 
     
@@ -51,7 +51,7 @@ def pnrc():
     if request.method=='POST':
         req_Json = request.json
         pnr_nos = req_Json['pnr_nos']
-        h = pnrconnect(pnr_nos)
+        h = pnr_connect(pnr_nos)
         if h == f:
             print("h : ", h)
             print(f"{pnr_nos} is a valid Pnr number")

@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, request
 
-from Bookticket4 import Ticket
+from book_ticket import Ticket
 
 import psycopg2
 import psycopg2.extras
@@ -12,8 +12,8 @@ def hello():
     print("Welcome")
 
 
-@app.route('/Booking',methods = ['POST'])
-def Booking():
+@app.route('/booking',methods = ['POST'])
+def booking():
     '''print("Welcome to booking")
     print("NAME: ", name)
     print("AGE:",age)
@@ -28,36 +28,32 @@ def Booking():
         req_Json =request.json
         Name = req_Json['Name']
         print(Name)
-        A_ge = req_Json['A_ge']
-        print(A_ge)
-        E_mail = req_Json['E_mail']
-        print(E_mail)
-        A_adhaar_no = req_Json['A_adhaar_no']
-        print(A_adhaar_no)
-        F_romstation = req_Json['F_romstation']
-        print(F_romstation)
-        T_ostation = req_Json['T_ostation']
-        print(T_ostation)
-        C_lass = req_Json['C_lass']
-        print(C_lass)
-        T_rain_no = req_Json['T_rain_no']
-        print(T_rain_no)
-        Fromstation = req_Json['Fromstation']
+        Age = req_Json['Age']
+        print(Age)
+        Email = req_Json['Email']
+        print(Email)
+        Aadhaar_no = req_Json['Aadhaar_no']
+        print(Aadhaar_no)
+        booking_class = req_Json['booking_class']
+        print(booking_class)
+        train_no = req_Json['train_no']
+        print(train_no)
+        from_station = req_Json['from_station']
         print(Fromstation)
-        Tostation = req_Json['Tostation']
-        print(Tostation)
-        Date = req_Json['Date']
-        print(Date)
-        no_of_seat_u_wanna_book = req_Json['no_of_seat_u_wanna_book']
-        print(no_of_seat_u_wanna_book)
+        to_station = req_Json['to_station']
+        print(to_station)
+        date = req_Json['date']
+        print(date)
+        no_of_seat_for_booking = req_Json['no_of_seat_for_booking']
+        print(no_of_seat_for_booking)
 
-        a = Ticket(Name,A_ge,E_mail,A_adhaar_no,F_romstation,T_ostation,C_lass,T_rain_no, Fromstation,Tostation,Date,no_of_seat_u_wanna_book)
-        a.Booking_Ticket()
+        a = Ticket(Name,Age,Email,Aadhaar_no,booking_class,train_no, from_station,to_station,date,no_of_seat_for_booking)
+        a.booking_ticket()
         e = a.seat_booking()
         print(str(e))
         
 
-        d = a.Pnrgenerator()
+        d = a.pnr_generator()
         print(str(d))
         return jsonify({"Your PNR number number is ":  str(d),
                         "no. Of seat you booked" : str(e),
