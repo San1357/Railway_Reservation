@@ -1,53 +1,53 @@
 import datetime
-import random
-import numpy as np
-import math
+
 import psycopg2
 import psycopg2.extras
 from TrainSearch import Search
-from flask import Flask, jsonify, request
 
-
-DB_Host = "127.0.0.1" 
+DB_Host = "127.0.0.1"
 DB_name = "myfirstdatabase"
 DB_user = "postgres"
 DB_pass = "ranchi1357"
 h = 0
 
-conn = psycopg2.connect(host = DB_Host, database = DB_name, user = DB_user, password = DB_pass)
+conn = psycopg2.connect(
+    host=DB_Host,
+    database=DB_name,
+    user=DB_user,
+    password=DB_pass)
 cur = conn.cursor()
 
 
 class Ticket(Search):
-    def __init__(self,name,age,email,aadhaar_no,booking_class, train_no, from_station,to_station,date, no_of_seat_for_booking):
+    def __init__(
+            self,
+            name,
+            age,
+            email,
+            aadhaar_no,
+            booking_class,
+            train_no,
+            from_station,
+            to_station,
+            date,
+            no_of_seat_for_booking):
         self.name = name
         self.age = age
         self.email = email
         self.aadhaar_no = aadhaar_no
-        #self.fromstation = fromstation
-        #self.tostation  = tostation
         self.booking_class = booking_class
         self.train_no = train_no
-        
-        super(Ticket, self).__init__(from_station,to_station,date)
+        super(Ticket, self).__init__(from_station, to_station, date)
         self.no_of_seat_for_booking = no_of_seat_for_booking
 
     def booking_ticket(self):
         print("NAME: ", self.name)
-        print("AGE:",self.age)
-        print("EMAIL:",self.email)
-        print("AADHAAR_NO:",self.aadhaar_no)
-        #print("FROM_STATION:",self.fromstation)
-        #print("TOSTATION:",self.tostation)
-        print("BOOKING_CLASS",self.booking_class)
-        print("TRAIN NO:",self.train_no)
-        print("no_of_seat_for_booking:",self.no_of_seat_for_booking)
-        
-        
-
-        
-
-        
+        print("AGE:", self.age)
+        print("EMAIL:", self.email)
+        print("AADHAAR_NO:", self.aadhaar_no)
+        print("BOOKING_CLASS", self.booking_class)
+        print("TRAIN NO:", self.train_no)
+        print("no_of_seat_for_booking:", self.no_of_seat_for_booking)
         List1 = []
         List1.append(self.name)
         List1.append(self.age)
@@ -61,32 +61,30 @@ class Ticket(Search):
         pas_set = (List1)
         print(pas)
         print(pas_set)
-
-        #pas = []
-
-        cur.execute("insert into TrainInfo (name, age, email, aadhaar_no, fromstation, tostation, Class, train_no)values(%s, %s, %s, %s, %s, %s, %s, %s)",(pas))
-        #v = cur.fetchone()
+        cur.execute(
+            "insert into TrainInfo (name, age, email, aadhaar_no, fromstation, tostation, Class, train_no)values(%s, %s, %s, %s, %s, %s, %s, %s)",
+            (pas))
         conn.commit()
-        #v = cur.fetchone()
-        #print(v)
         print("Record of Pasenger inserted!!")
 
     def seat_booking(self):
-        self.train_Search()
+        self._train_search()
 
         print("Hello world ", self.info)
-        self.get_train_Details()
-        
-        #l = int(input("enter the number of seats u want:"))
-        
+        self.get_train_details()
+
         if self.no_of_seat_for_booking <= self.info[5]:
             print("Congratulations!!")
-            print("You got ur seats book:",self.no_of_seat_for_booking)
+            print("You got ur seats book:", self.no_of_seat_for_booking)
             self.info[5] = self.info[5] - self.no_of_seat_for_booking
-            y = cur.execute("update traindetail set avail_seat = %s where fromstation = %s and tostation = %s",(self.info[5],self.from_station,self.to_station))
+            cur.execute(
+                "update traindetail set avail_seat = %s where fromstation = %s and tostation = %s",
+                (self.info[5],
+                 self.from_station,
+                 self.to_station))
             conn.commit()
             count = self.no_of_seat_for_booking
-            print (count, "success")
+            print(count, "success")
             print("Now, Total no. of Seats available:", self.info[5])
             return count
             '''result = {
@@ -94,42 +92,39 @@ class Ticket(Search):
                 "no.Of Seat Booked": count,
                 "Total no.Of Seat available": self.info[5]
             }'''
-            
+
         if self.no_of_seat_for_booking > self.info[5]:
             print("Sorry We don't have this no. of seat available.")
-            print("We have only", self.info[5],"no . of seat available. ThankYou!!!")
-            count1 =0
+            print(
+                "We have only",
+                self.info[5],
+                "no . of seat available. ThankYou!!!")
+            count1 = 0
             return count1
-            
+
             '''result = {
                 "Status": False,
                 "no. of seat Booked": "not enough seat available",
                 "Total no. Of Seat available": self.info[5]
             }'''
-            
-        
-        #response = (jsonify(result))
-        #print(response)
-        #return response
-    
+
     def pnr_generator(self):
         ct = datetime.datetime.now()
-        self.pnr = int(ct.timestamp() *10)
-        #print("Pnr Number:", (self.pnr))
-        
-        #if self.pnr not in TrainInfo
-        cur.execute("update TrainInfo set pnr_number = %s where aadhaar_no = %s",(self.pnr, self.aadhaar_no))
-        
-        conn.commit()
-        print ("Your PNR NUMBER IS:", (self.pnr))
-        return(self.pnr)
-        #return pnr
+        self.pnr = int(ct.timestamp() * 10)
 
+        cur.execute(
+            "update TrainInfo set pnr_number = %s where aadhaar_no = %s",
+            (self.pnr,
+             self.aadhaar_no))
+
+        conn.commit()
+        print("Your PNR NUMBER IS:", (self.pnr))
+        return(self.pnr)
 
 
 '''a = Ticket("diya", 19, "diya105@gmail.com", 130409, "Gkp", "kanpur","General", 1000409,"Gorakhpur","Pune","12-03-2021")
 print("------------ a.BOooking_ticket --------------")
-a.Booking_Ticket() 
+a.Booking_Ticket()
 print("-------------a.Seat_booking ------------")
 a.seat_booking()
 print("-----a.Pnrgenerator----------")
