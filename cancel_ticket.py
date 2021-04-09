@@ -1,5 +1,4 @@
 import psycopg2
-import psycopg2.extras
 from book_ticket import Ticket
 from train_search import Search
 
@@ -38,5 +37,5 @@ c.get_cancel_ticket()
 print("cur is closed")
 cur.close()
 print("conn is closed")
-conn.close()
-'''
+conn.close()'''
+

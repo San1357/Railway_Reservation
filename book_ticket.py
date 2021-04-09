@@ -2,7 +2,7 @@ import datetime
 
 import psycopg2
 import psycopg2.extras
-from TrainSearch import Search
+from train_search import Search
 
 DB_Host = "127.0.0.1"
 DB_name = "myfirstdatabase"
@@ -122,13 +122,13 @@ class Ticket(Search):
         return(self.pnr)
 
 
-'''a = Ticket("diya", 19, "diya105@gmail.com", 130409, "Gkp", "kanpur","General", 1000409,"Gorakhpur","Pune","12-03-2021")
+'''a = Ticket("hiya", 19, "hiya105@gmail.com", 1305209, "General", 1000409,"Gorakhpur","Pune","12-03-2021",1)
 print("------------ a.BOooking_ticket --------------")
-a.Booking_Ticket()
+a.booking_ticket()
 print("-------------a.Seat_booking ------------")
 a.seat_booking()
 print("-----a.Pnrgenerator----------")
-a.Pnrgenerator()
+a.pnr_generator()
 print("cur is closed")
 cur.close()
 print("conn is closed")

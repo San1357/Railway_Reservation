@@ -32,9 +32,9 @@ class Search():
         print(Ls)
 
         cur.execute(
-            "select * from traindetail where fromstation=%s and tostation=%s ",
-            (self.from_station,
-             self.to_station))
+            "select * from traindetail where fromstation=%s and tostation=%s",
+            (self.from_station, self.to_station))
+        self.info = list(cur.fetchone())
 
         print(self.info)
         print(type(self.info))
