@@ -38,4 +38,3 @@ print("cur is closed")
 cur.close()
 print("conn is closed")
 conn.close()'''
-
