@@ -62,7 +62,7 @@ class Ticket(Search):
         print(pas)
         print(pas_set)
         cur.execute(
-            "insert into TrainInfo (name, age, email, aadhaar_no, fromstation, tostation, Class, train_no)values(%s, %s, %s, %s, %s, %s, %s, %s)",
+            "insert into passenger_details (name, age, email, aadhaar_no, fromstation, tostation, Class, train_no)values(%s, %s, %s, %s, %s, %s, %s, %s)",
             (pas))
         conn.commit()
         print("Record of Pasenger inserted!!")
@@ -113,7 +113,7 @@ class Ticket(Search):
         self.pnr = int(ct.timestamp() * 10)
 
         cur.execute(
-            "update TrainInfo set pnr_number = %s where aadhaar_no = %s",
+            "update passenger_details set pnr_number = %s where aadhaar_no = %s",
             (self.pnr,
              self.aadhaar_no))
 

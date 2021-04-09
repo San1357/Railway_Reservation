@@ -57,7 +57,7 @@ Some more Informations :
 I have create 3 databases Named trainInfo, Train_Detail, Pnr_store .
 
 
-1)  trainInfo Database :
+1)  passenger_details Database :
     
     It holds the records of Passenger detail(like name, age, email, adhaar_no,.... , Pnr_number)
     
