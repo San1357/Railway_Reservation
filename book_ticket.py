@@ -84,7 +84,6 @@ class Ticket(Search):
             seat_booked = self.no_of_seat_for_booking
             print(seat_booked, "success")
             print("Now, Total no. of Seats available:", self.traindetail_info[5])
-            # return count
 
         elif self.no_of_seat_for_booking > self.traindetail_info[5]:
             print("Sorry We don't have this no. of seat available.")
@@ -93,10 +92,7 @@ class Ticket(Search):
                 self.traindetail_info[5],
                 "no . of seat available. ThankYou!!!")
             seat_booked = 0
-            # return count1
-        
         return seat_booked
-
 
     def pnr_generator(self):
         ct = datetime.datetime.now()
@@ -110,6 +106,7 @@ class Ticket(Search):
         conn.commit()
         print("Your PNR NUMBER IS:", (self.pnr))
         return(self.pnr)
+
 
 '''
 booking_ticket = Ticket("shiya", 19, "shiya105@gmail.com", 1305809, "General", 1000409,"Gorakhpur","Pune","12-03-2021",1)

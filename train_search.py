@@ -43,7 +43,7 @@ class Search():
         print("train no:", self.traindetail_info[2])
         print("train name : ", self.traindetail_info[3])
         print("total no of seat:", self.traindetail_info[4])
-        print("available seat: ",self.traindetail_info[5])
+        print("available seat: ", self.traindetail_info[5])
         print(type(self.traindetail_info[0]))
         print(type(self.traindetail_info[1]))
         print(type(self.traindetail_info[2]))
