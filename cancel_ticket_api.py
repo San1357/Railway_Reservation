@@ -16,11 +16,11 @@ def _cancel_ticket():
         req_json = request.json
         pnr_no = req_json['pnr_no']
         print(pnr_no)
-        b = CancelTicket(pnr_no)
-        c = b.get_cancel_ticket()
-        print(str(c))
+        cancel_ticket_object = CancelTicket(pnr_no)
+        pnr_of_cancel_ticket = cancel_ticket_object.get_cancel_ticket()
+        print(str(pnr_of_cancel_ticket))
 
-        return jsonify({"PNR Number": str(c), "Ticket Cancelled Status": True})
+        return jsonify({"PNR Number": str(pnr_of_cancel_ticket), "Ticket Cancelled Status": True})
 
 
 if __name__ == "__main__":

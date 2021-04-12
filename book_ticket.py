@@ -48,65 +48,55 @@ class Ticket(Search):
         print("BOOKING_CLASS", self.booking_class)
         print("TRAIN NO:", self.train_no)
         print("no_of_seat_for_booking:", self.no_of_seat_for_booking)
-        List1 = []
-        List1.append(self.name)
-        List1.append(self.age)
-        List1.append(self.email)
-        List1.append(self.aadhaar_no)
-        List1.append(self.from_station)
-        List1.append(self.to_station)
-        List1.append(self.booking_class)
-        List1.append(self.train_no)
-        pas = List1.copy()
-        pas_set = (List1)
-        print(pas)
-        print(pas_set)
+        passenger_detail_list = []
+        passenger_detail_list.append(self.name)
+        passenger_detail_list.append(self.age)
+        passenger_detail_list.append(self.email)
+        passenger_detail_list.append(self.aadhaar_no)
+        passenger_detail_list.append(self.from_station)
+        passenger_detail_list.append(self.to_station)
+        passenger_detail_list.append(self.booking_class)
+        passenger_detail_list.append(self.train_no)
+        print(passenger_detail_list)
         cur.execute(
             "insert into passenger_details (name, age, email, aadhaar_no, fromstation, tostation, Class, train_no)values(%s, %s, %s, %s, %s, %s, %s, %s)",
-            (pas))
+            (passenger_detail_list))
         conn.commit()
         print("Record of Pasenger inserted!!")
 
     def seat_booking(self):
-        self._train_search()
+        self.train_search()
 
-        print("Hello world ", self.info)
+        print("Hello world ", self.traindetail_info)
         self.get_train_details()
 
-        if self.no_of_seat_for_booking <= self.info[5]:
+        seat_booked = 0
+        if self.no_of_seat_for_booking <= self.traindetail_info[5]:
             print("Congratulations!!")
             print("You got ur seats book:", self.no_of_seat_for_booking)
-            self.info[5] = self.info[5] - self.no_of_seat_for_booking
+            self.traindetail_info[5] = self.traindetail_info[5] - self.no_of_seat_for_booking
             cur.execute(
                 "update traindetail set avail_seat = %s where fromstation = %s and tostation = %s",
-                (self.info[5],
+                (self.traindetail_info[5],
                  self.from_station,
                  self.to_station))
             conn.commit()
-            count = self.no_of_seat_for_booking
-            print(count, "success")
-            print("Now, Total no. of Seats available:", self.info[5])
-            return count
-            '''result = {
-                "status": True,
-                "no.Of Seat Booked": count,
-                "Total no.Of Seat available": self.info[5]
-            }'''
+            seat_booked = self.no_of_seat_for_booking
+            print(seat_booked, "success")
+            print("Now, Total no. of Seats available:", self.traindetail_info[5])
+            # return count
 
-        if self.no_of_seat_for_booking > self.info[5]:
+        elif self.no_of_seat_for_booking > self.traindetail_info[5]:
             print("Sorry We don't have this no. of seat available.")
             print(
                 "We have only",
-                self.info[5],
+                self.traindetail_info[5],
                 "no . of seat available. ThankYou!!!")
-            count1 = 0
-            return count1
+            seat_booked = 0
+            # return count1
+        
+        return seat_booked
 
-            '''result = {
-                "Status": False,
-                "no. of seat Booked": "not enough seat available",
-                "Total no. Of Seat available": self.info[5]
-            }'''
 
     def pnr_generator(self):
         ct = datetime.datetime.now()
@@ -121,14 +111,14 @@ class Ticket(Search):
         print("Your PNR NUMBER IS:", (self.pnr))
         return(self.pnr)
 
-
-'''a = Ticket("hiya", 19, "hiya105@gmail.com", 1305209, "General", 1000409,"Gorakhpur","Pune","12-03-2021",1)
-print("------------ a.BOooking_ticket --------------")
-a.booking_ticket()
-print("-------------a.Seat_booking ------------")
-a.seat_booking()
-print("-----a.Pnrgenerator----------")
-a.pnr_generator()
+'''
+booking_ticket = Ticket("shiya", 19, "shiya105@gmail.com", 1305809, "General", 1000409,"Gorakhpur","Pune","12-03-2021",1)
+print("------------ BOooking_ticket --------------")
+booking_ticket.booking_ticket()
+print("-------------Seat_booking ------------")
+booking_ticket.seat_booking()
+print("-----Pnrgenerator----------")
+booking_ticket.pnr_generator()
 print("cur is closed")
 cur.close()
 print("conn is closed")
