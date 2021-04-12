@@ -31,10 +31,11 @@ class CancelTicket(Ticket, Search):
         return self.pnr_no
 
 
-'''c = CancelTicket(16171998977)
-c.get_cancel_ticket()
+ticket_cancel = CancelTicket(16171998977)
+ticket_cancel.get_cancel_ticket()
 
 print("cur is closed")
 cur.close()
 print("conn is closed")
-conn.close()'''
+conn.close()
+

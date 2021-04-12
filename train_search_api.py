@@ -21,12 +21,12 @@ def search_api():
         date = req_json['date']
         print(date)
 
-        a = Search(from_station, to_station, date)
-        a._train_search()
-        v = a.get_train_details()
-        t = a.train_schedule()
-        print(v)
-        return jsonify({"Your Details are": v, "Train Schedule are": t})
+        train_search_object = Search(from_station, to_station, date)
+        train_search_object.train_search()
+        detail_of_train = train_search_object.get_train_details()
+        schedule_of_train = train_search_object.train_schedule()
+        print(detail_of_train)
+        return jsonify({"Your Details are": detail_of_train, "Train Schedule are": schedule_of_train})
 
 
 if __name__ == "__main__":

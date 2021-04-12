@@ -9,8 +9,8 @@ pgAdmin ?
 
 
 
---> Passenger_details Database : It store the detail of every Passenger like name, email, age, Train_no, TrainName,
-                               From/Tostation, Aadhaar_no, & Pnr number etc 
+--> Passenger_details Database : It store the detail of every Passenger like name, email, age, train_no, TrainName,
+                               from/tostation, aadhaar_no, & pnr_number etc 
 
 
 --> Traindetail Database : It store the Train Detail means List of Train.  like Train_no , Train_name, 

@@ -20,51 +20,51 @@ class Search():
         self.date = date
         self.info = []
 
-    def _train_search(self):
+    def train_search(self):
         print("FROM: ", self.from_station)
         print("TO: ", self.to_station)
         print("Date: ", self.date)
 
-        Ls = []
-        Ls.append(self.from_station)
-        Ls.append(self.to_station)
-        Ls.append(self.date)
-        print(Ls)
+        search_list = []
+        search_list.append(self.from_station)
+        search_list.append(self.to_station)
+        search_list.append(self.date)
+        print(search_list)
 
         cur.execute(
             "select * from traindetail where fromstation=%s and tostation=%s",
             (self.from_station, self.to_station))
-        self.info = list(cur.fetchone())
+        self.traindetail_info = list(cur.fetchone())
 
-        print(self.info)
-        print(type(self.info))
-        print(self.info[0])
-        print(self.info[1])
-        print(self.info[2])
-        print(self.info[3])
-        print(self.info[4])
-        print(self.info[5])
-        print(type(self.info[0]))
-        print(type(self.info[1]))
-        print(type(self.info[2]))
-        print(type(self.info[3]))
-        print(type(self.info[4]))
-        print(type(self.info[5]))
+        print(self.traindetail_info)
+        print(type(self.traindetail_info))
+        print("from station:", self.traindetail_info[0])
+        print("to station:", self.traindetail_info[1])
+        print("train no:", self.traindetail_info[2])
+        print("train name : ", self.traindetail_info[3])
+        print("total no of seat:", self.traindetail_info[4])
+        print("available seat: ",self.traindetail_info[5])
+        print(type(self.traindetail_info[0]))
+        print(type(self.traindetail_info[1]))
+        print(type(self.traindetail_info[2]))
+        print(type(self.traindetail_info[3]))
+        print(type(self.traindetail_info[4]))
+        print(type(self.traindetail_info[5]))
 
     def get_train_details(self):
 
-        if self.info is not None:
-            if self.info[0] == self.from_station and self.info[1] == self.to_station:
+        if self.traindetail_info is not None:
+            if self.traindetail_info[0] == self.from_station and self.traindetail_info[1] == self.to_station:
                 print("** Here is your Train detail **")
-                print("Train NO:", self.info[2])
-                print("Train Name:", self.info[3])
-                print("Total Seats are:", self.info[4])
-                print("Available Seats are:", self.info[5])
+                print("Train NO:", self.traindetail_info[2])
+                print("Train Name:", self.traindetail_info[3])
+                print("Total Seats are:", self.traindetail_info[4])
+                print("Available Seats are:", self.traindetail_info[5])
                 result = {
-                    "TrainNO": self.info[2],
-                    "Train_Name": self.info[3],
-                    "Total Seats are": self.info[4],
-                    "Available Seats are": self.info[5]}
+                    "TrainNO": self.traindetail_info[2],
+                    "Train_Name": self.traindetail_info[3],
+                    "Total Seats are": self.traindetail_info[4],
+                    "Available Seats are": self.traindetail_info[5]}
                 return result
             else:
                 print(
@@ -72,10 +72,10 @@ class Search():
 
     def train_schedule(self):
 
-        if self.info is not None:
-            if self.info[0] == self. from_station and self.info[1] == self.to_station:
+        if self.traindetail_info is not None:
+            if self.traindetail_info[0] == self. from_station and self.traindetail_info[1] == self.to_station:
                 print("** Train Schedule **")
-                results = self.info[6]
+                results = self.traindetail_info[6]
                 print(results)
                 print(type(results))
                 for i in results:
@@ -83,14 +83,14 @@ class Search():
                 return results
 
 
-print("---------------Class Init started---------------")
-x = Search("Noida", "Gorakhpur", "12-03-2021")
-print("---------------train_Search()--------------")
-x._train_search()
-print("---------------get_train_Details()--------------")
-x.get_train_details()
-print("---------------Train_Schedule()--------------")
-x.train_schedule()
 '''
+print("---------------Class Init started---------------")
+search_train_object = Search("Noida", "Gorakhpur", "12-03-2021")
+print("---------------train_Search()--------------")
+search_train_object.train_search()
+print("---------------get_train_Details()--------------")
+search_train_object.get_train_details()
+print("---------------Train_Schedule()--------------")
+search_train_object.train_schedule()
 cur.close()
 conn.close() '''

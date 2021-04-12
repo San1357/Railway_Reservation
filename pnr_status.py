@@ -45,8 +45,8 @@ def pnrc():
     f = ('Not confirmed', 'yes')
     j = ('confirmed', 'yes')
     if request.method == 'POST':
-        req_Json = request.json
-        pnr_nos = req_Json['pnr_nos']
+        req_json = request.json
+        pnr_nos = req_json['pnr_nos']
         h = pnr_connect(pnr_nos)
         if h == f:
             print("h : ", h)
