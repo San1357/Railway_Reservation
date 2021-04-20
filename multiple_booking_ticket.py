@@ -106,6 +106,14 @@ class MultipleBooking:
         self.pnr_list_value = []
         self.pnr = int((ct.timestamp() * 1000000))
 
+        for b in range(0, self.no_of_seat):
+            b = (b + self.pnr)
+            emptytuple = ()
+            self.pnr_list_value_as_tuple = emptytuple + (b,)
+            print("wer:", self.pnr_list_value_as_tuple)
+            self.pnr_list_value.append(self.pnr_list_value_as_tuple)
+            print("b:", self.pnr_list_value)
+
     def update_passenger_info(self):
         pass
 
