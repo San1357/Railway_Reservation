@@ -127,7 +127,19 @@ class MultipleBooking:
         conn.commit()
 
     def book_seat(self):
-        pass
+        self.get_available_seat()
+        # self.update_passenger_info()
+
+        if self.no_of_seat < self.avail_seat:
+            self.avail_seat = self.avail_seat - self.no_of_seat
+            self.update_traindetail()
+            self.pnr_generator()
+            self.update_passenger_info()
+            self.status = "True"
+            return self.no_of_seat
+        else:
+            self.status = "False"
+            return self.no_of_seat
 
     def create_response(self):
         pass
