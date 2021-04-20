@@ -100,7 +100,11 @@ class MultipleBooking:
         conn.commit()
 
     def pnr_generator(self):
-        pass
+        ct = datetime.datetime.now()
+
+        self.pnr_list_value_as_tuple = ()
+        self.pnr_list_value = []
+        self.pnr = int((ct.timestamp() * 1000000))
 
     def update_passenger_info(self):
         pass
