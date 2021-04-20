@@ -123,6 +123,8 @@ class MultipleBooking:
             print("t:", t)
             self.passenger_detail_list_of_tuple[t] = self.passenger_detail_list_of_tuple[t] + self.pnr_list_value[t]
         print("append_both:", self.passenger_detail_list_of_tuple)
+        cur.executemany("insert into passenger_details(name, email, age, aadhaar_no, fromstation, tostation, class, train_no, pnr_number)values(%s, %s,%s, %s,%s, %s, %s, %s, %s)", self.passenger_detail_list_of_tuple)
+        conn.commit()
 
     def book_seat(self):
         pass
