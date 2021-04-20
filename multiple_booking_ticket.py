@@ -85,8 +85,14 @@ class MultipleBooking:
 
 
     def get_available_seat(self):
-        pass
-
+        self.avail_seat = 0
+        cur.execute("select * from traindetail where train_no = %s", ([
+            self.train_no]))
+        self.rows = list(cur.fetchone())
+        self.avail_seat = self.rows[5]
+        print("available seat:", self.avail_seat)
+        return self.avail_seat
+        
     def update_traindetail(self):
         pass
 
