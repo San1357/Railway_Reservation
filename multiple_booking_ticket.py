@@ -114,6 +114,10 @@ class MultipleBooking:
             self.pnr_list_value.append(self.pnr_list_value_as_tuple)
             print("b:", self.pnr_list_value)
 
+        print("asd:", self.pnr_list_value)
+        print(self.pnr_list_value)
+        print("Your PNR NUMBER IS:", self.pnr_list_value)
+
     def update_passenger_info(self):
         pass
 
