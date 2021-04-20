@@ -142,4 +142,18 @@ class MultipleBooking:
             return self.no_of_seat
 
     def create_response(self):
-        pass
+        if self.status == "True":
+
+            result = {
+                "status": "booked",
+                "no_of_seat_booked": self.no_of_seat
+            }
+
+        elif self.status == "False":
+            result = {
+                "status": "not booked",
+                "no_of_seat_booked": 0
+            }
+
+        print(result)
+        return result
