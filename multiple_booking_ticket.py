@@ -92,9 +92,12 @@ class MultipleBooking:
         self.avail_seat = self.rows[5]
         print("available seat:", self.avail_seat)
         return self.avail_seat
-        
+
     def update_traindetail(self):
-        pass
+        cur.execute("update traindetail set avail_seat = %s where train_no = %s", (
+            self.avail_seat, self.train_no))
+
+        conn.commit()
 
     def pnr_generator(self):
         pass
