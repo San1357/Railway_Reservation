@@ -68,8 +68,22 @@ class MultipleBooking:
         print(self.from_station)
         print(self.to_station)
 
+        print("-----------passenger_details(list_of_tuple-------------------")
+        self.passenger_detail_list_of_tuple = []
 
-        
+        for i in self.passenger_details:
+
+            self.passenger_detail_tuple = (i['name'], i['email'], i['age'], i['aadhaar_no'], self.from_station, self.to_station, self.booking_class, self.train_no)
+            print(self.passenger_detail_tuple)
+            print(type(self.passenger_detail_tuple))
+            # list of tuple
+            self.passenger_detail_list_of_tuple.append(self.passenger_detail_tuple)
+
+        print("-----------------final list ---------------")
+        print("Passenger_detail_list:", self.passenger_detail_list_of_tuple)
+        print(type(self.passenger_detail_list_of_tuple))
+
+
     def get_available_seat(self):
         pass
 
