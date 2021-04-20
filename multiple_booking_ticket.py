@@ -83,7 +83,6 @@ class MultipleBooking:
         print("Passenger_detail_list:", self.passenger_detail_list_of_tuple)
         print(type(self.passenger_detail_list_of_tuple))
 
-
     def get_available_seat(self):
         self.avail_seat = 0
         cur.execute("select * from traindetail where train_no = %s", ([
