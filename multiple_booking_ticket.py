@@ -20,6 +20,7 @@ cur = conn.cursor()
 class MultipleBooking:
 
     def parsing(self):
+        self.req_uest = {}
         self.no_of_seat = 0
         self.train_no = 0
         self.passenger_detail_list = []
@@ -156,3 +157,12 @@ class MultipleBooking:
 
         print(result)
         return result
+
+a = MultipleBooking()
+a.parsing()
+# a.get_available_seat()
+# a.update_traindetail()
+# a.pnr_generator()
+# a.update_passenger_info()
+a.book_seat()
+a.create_response()
