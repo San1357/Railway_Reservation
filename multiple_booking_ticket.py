@@ -119,7 +119,10 @@ class MultipleBooking:
         print("Your PNR NUMBER IS:", self.pnr_list_value)
 
     def update_passenger_info(self):
-        pass
+        for t in range(0, self.no_of_seat):
+            print("t:", t)
+            self.passenger_detail_list_of_tuple[t] = self.passenger_detail_list_of_tuple[t] + self.pnr_list_value[t]
+        print("append_both:", self.passenger_detail_list_of_tuple)
 
     def book_seat(self):
         pass
