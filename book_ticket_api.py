@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, request
-
+import json
 from book_ticket import Ticket
 
 
@@ -13,15 +13,6 @@ def hello():
 
 @app.route('/booking', methods=['POST'])
 def booking():
-    '''print("Welcome to booking")
-    print("NAME: ", name)
-    print("AGE:",age)
-    print("EMAIL:",email)
-    print("AADHAAR_NO:",aadhaar_no)
-    print("FROM_STATION:",fromstation)
-    print("TOSTATION:",tostation)
-    print("CLASS",Class)
-    print("TRAIN NO:",train_no)'''
 
     if request.method == "POST":
         req_json = request.json
@@ -45,6 +36,7 @@ def booking():
         print(date)
         no_of_seat_for_booking = req_json['no_of_seat_for_booking']
         print(no_of_seat_for_booking)
+        
 
         ticket_object = Ticket(
             name,

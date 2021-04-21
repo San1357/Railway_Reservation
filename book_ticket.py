@@ -1,5 +1,4 @@
 import datetime
-
 import psycopg2
 import psycopg2.extras
 from train_search import Search
@@ -57,9 +56,10 @@ class Ticket(Search):
         passenger_detail_list.append(self.to_station)
         passenger_detail_list.append(self.booking_class)
         passenger_detail_list.append(self.train_no)
+        passenger_detail_list.append(self.no_of_seat_for_booking)
         print(passenger_detail_list)
         cur.execute(
-            "insert into passenger_details (name, age, email, aadhaar_no, fromstation, tostation, Class, train_no)values(%s, %s, %s, %s, %s, %s, %s, %s)",
+            "insert into passenger_details (name, age, email, aadhaar_no, fromstation, tostation, Class, train_no, seat_booked)values(%s, %s, %s, %s, %s, %s, %s, %s, %s)",
             (passenger_detail_list))
         conn.commit()
         print("Record of Pasenger inserted!!")
@@ -109,14 +109,15 @@ class Ticket(Search):
 
 
 '''
-booking_ticket = Ticket("shiya", 19, "shiya105@gmail.com", 1305809, "General", 1000409,"Gorakhpur","Pune","12-03-2021",1)
+king_ticket = Ticket("liya", 19, "liya105@gmail.com", 1305309, "General", 1000409,"Gorakhpur","Pune","12-03-2021",3)
 print("------------ BOooking_ticket --------------")
-booking_ticket.booking_ticket()
+king_ticket.booking_ticket()
 print("-------------Seat_booking ------------")
-booking_ticket.seat_booking()
+king_ticket.seat_booking()
 print("-----Pnrgenerator----------")
-booking_ticket.pnr_generator()
+king_ticket.pnr_generator()
 print("cur is closed")
 cur.close()
 print("conn is closed")
-conn.close()'''
+conn.close()
+'''
