@@ -1,6 +1,7 @@
 import datetime
 import psycopg2
 import psycopg2.extras
+from flask import jsonify, Flask
 
 
 DB_Host = "127.0.0.1"
@@ -19,42 +20,13 @@ cur = conn.cursor()
 
 class MultipleBooking:
 
-    def parsing(self):
-        self.req_uest = {}
+    def parsing(self, req_json):
+        self.request = {}
         self.no_of_seat = 0
         self.train_no = 0
         self.passenger_detail_list = []
+        self.request = req_json
 
-        self.request = {
-            "train_no": 12110,
-            "no_of_seat": 3,
-            "booking_class": "General",
-            "from_station": "Noida",
-            "to_station": "Gorakhpur",
-            "date": "12-03-2021",
-            "passenger":
-                    [
-
-                        {
-                            "name": "brijesh",
-                            "email": "brijesh105@gmail.com",
-                            "age": 19,
-                            "aadhaar_no": 1300219,
-                        },
-                        {
-                            "name": "vinuj",
-                            "email": "vinuj123@gmail.com",
-                            "age": 19,
-                            "aadhaar_no": 1972192,
-                        },
-                        {
-                            "name": "sidhu",
-                            "email": "sidhu123@gmail.com",
-                            "age": 19,
-                            "aadhaar_no": 1972152,
-                        },
-                    ]
-        }
         self.passenger_details = self.request['passenger']
         print("passenger:", self.passenger_details)
         self.train_no = self.request['train_no']
@@ -63,11 +35,14 @@ class MultipleBooking:
         self.from_station = self.request['from_station']
         self.to_station = self.request['to_station']
         print("--------------------------------")
-        print(self.train_no)
-        print(self.no_of_seat)
-        print(self.booking_class)
-        print(self.from_station)
-        print(self.to_station)
+        
+        # TODO add string in the print command
+        print("Train_no:", self.train_no)
+        print("Data Type of Train_no:",type(self.train_no))
+        print("no of Seat :",self.no_of_seat)
+        print("Booking Class:",self.booking_class)
+        print("From Station:", self.from_station)
+        print("To Station:", self.to_station)
 
         print("-----------passenger_details(list_of_tuple-------------------")
         self.passenger_detail_list_of_tuple = []
@@ -75,8 +50,8 @@ class MultipleBooking:
         for i in self.passenger_details:
 
             self.passenger_detail_tuple = (i['name'], i['email'], i['age'], i['aadhaar_no'], self.from_station, self.to_station, self.booking_class, self.train_no)
-            print(self.passenger_detail_tuple)
-            print(type(self.passenger_detail_tuple))
+            print("Passenger detail:",self.passenger_detail_tuple)
+            print("Data type of Passenger detail:",type(self.passenger_detail_tuple))
             # list of tuple
             self.passenger_detail_list_of_tuple.append(self.passenger_detail_tuple)
 
@@ -110,25 +85,24 @@ class MultipleBooking:
             b = (b + self.pnr)
             emptytuple = ()
             self.pnr_list_value_as_tuple = emptytuple + (b,)
-            print("wer:", self.pnr_list_value_as_tuple)
+            print("PNR Number(in tuple form):", self.pnr_list_value_as_tuple)
             self.pnr_list_value.append(self.pnr_list_value_as_tuple)
-            print("b:", self.pnr_list_value)
+            print("Pnr Number:", self.pnr_list_value)
 
-        print("asd:", self.pnr_list_value)
+        # TODO remove asd and use proper variable
+        print("Pnr Number(in List of tuple form) :", self.pnr_list_value)
         print(self.pnr_list_value)
         print("Your PNR NUMBER IS:", self.pnr_list_value)
 
     def update_passenger_info(self):
         for t in range(0, self.no_of_seat):
-            print("t:", t)
             self.passenger_detail_list_of_tuple[t] = self.passenger_detail_list_of_tuple[t] + self.pnr_list_value[t]
-        print("append_both:", self.passenger_detail_list_of_tuple)
+        print("Passenger detail(including Pnr number):", self.passenger_detail_list_of_tuple)
         cur.executemany("insert into passenger_details(name, email, age, aadhaar_no, fromstation, tostation, class, train_no, pnr_number)values(%s, %s,%s, %s,%s, %s, %s, %s, %s)", self.passenger_detail_list_of_tuple)
         conn.commit()
 
     def book_seat(self):
         self.get_available_seat()
-        # self.update_passenger_info()
 
         if self.no_of_seat < self.avail_seat:
             self.avail_seat = self.avail_seat - self.no_of_seat
@@ -139,30 +113,34 @@ class MultipleBooking:
             return self.no_of_seat
         else:
             self.status = "False"
-            return self.no_of_seat
+        
 
     def create_response(self):
         if self.status == "True":
-
+            a = 0
             result = {
                 "status": "booked",
-                "no_of_seat_booked": self.no_of_seat
+                "no_of_seat_booked": str(self.no_of_seat)
             }
 
         elif self.status == "False":
             result = {
                 "status": "not booked",
-                "no_of_seat_booked": 0
+                "no_of_seat_booked": str(a)
             }
-
         print(result)
-        return result
+        return jsonify(result)
 
-a = MultipleBooking()
-a.parsing()
-# a.get_available_seat()
-# a.update_traindetail()
-# a.pnr_generator()
-# a.update_passenger_info()
-a.book_seat()
-a.create_response()
+
+# TODO : add if name == main        
+if __name__ ==
+
+'''ticket_booking_object = MultipleBooking()
+ticket_booking_object.parsing()
+# ticket_booking_object.get_available_seat()
+# ticket_booking_object.update_traindetail()
+# ticket_booking_object.pnr_generator()
+# ticket_booking_object.update_passenger_info()
+ticket_booking_object.book_seat()
+ticket_booking_object.create_response()
+'''
