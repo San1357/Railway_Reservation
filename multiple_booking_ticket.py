@@ -1,7 +1,7 @@
 import datetime
 import psycopg2
 import psycopg2.extras
-from flask import jsonify, Flask
+from flask import jsonify
 
 
 DB_Host = "127.0.0.1"
@@ -35,12 +35,10 @@ class MultipleBooking:
         self.from_station = self.request['from_station']
         self.to_station = self.request['to_station']
         print("--------------------------------")
-        
-        # TODO add string in the print command
         print("Train_no:", self.train_no)
-        print("Data Type of Train_no:",type(self.train_no))
-        print("no of Seat :",self.no_of_seat)
-        print("Booking Class:",self.booking_class)
+        print("Data Type of Train_no:", type(self.train_no))
+        print("no of Seat :", self.no_of_seat)
+        print("Booking Class:", self.booking_class)
         print("From Station:", self.from_station)
         print("To Station:", self.to_station)
 
@@ -50,8 +48,8 @@ class MultipleBooking:
         for i in self.passenger_details:
 
             self.passenger_detail_tuple = (i['name'], i['email'], i['age'], i['aadhaar_no'], self.from_station, self.to_station, self.booking_class, self.train_no)
-            print("Passenger detail:",self.passenger_detail_tuple)
-            print("Data type of Passenger detail:",type(self.passenger_detail_tuple))
+            print("Passenger detail:", self.passenger_detail_tuple)
+            print("Data type of Passenger detail:", type(self.passenger_detail_tuple))
             # list of tuple
             self.passenger_detail_list_of_tuple.append(self.passenger_detail_tuple)
 
@@ -89,7 +87,6 @@ class MultipleBooking:
             self.pnr_list_value.append(self.pnr_list_value_as_tuple)
             print("Pnr Number:", self.pnr_list_value)
 
-        # TODO remove asd and use proper variable
         print("Pnr Number(in List of tuple form) :", self.pnr_list_value)
         print(self.pnr_list_value)
         print("Your PNR NUMBER IS:", self.pnr_list_value)
@@ -113,7 +110,6 @@ class MultipleBooking:
             return self.no_of_seat
         else:
             self.status = "False"
-        
 
     def create_response(self):
         if self.status == "True":
