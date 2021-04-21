@@ -16,7 +16,17 @@ def hello():
 
 @app.route('/multiple_bookings', methods=['POST'])
 def multiple_bookings():
-    pass
+    if request.method == "POST":
+        req_json = request.json
+        pprint.pprint(req_json) # pprint will print your response in response json format.
+
+        ticket_booking = MultipleBooking()
+        ticket_booking.parsing(req_json)
+        ticket_booking.book_seat()
+
+        response = ticket_booking.create_response()
+        
+        return response
 
     
 
