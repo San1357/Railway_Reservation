@@ -132,9 +132,6 @@ class MultipleBooking:
         return jsonify(result)
 
 
-# TODO : add if name == main        
-if __name__ ==
-
 '''ticket_booking_object = MultipleBooking()
 ticket_booking_object.parsing()
 # ticket_booking_object.get_available_seat()
