@@ -12,6 +12,12 @@ app = Flask(__name__)
 def hello():
     print("Welcome")
 
+
+
+@app.route('/multiple_bookings', methods=['POST'])
+def multiple_bookings():
+    pass
+
     
 
 if __name__ == "__main__":
