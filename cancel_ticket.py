@@ -2,10 +2,10 @@ import psycopg2
 from train_search import Search
 
 
-DB_Host = "127.0.0.1"
+DB_Host = "localhost"
 DB_name = "myfirstdatabase"
 DB_user = "postgres"
-DB_pass = "ranchi1357"
+DB_pass = "password"
 
 conn = psycopg2.connect(
     host=DB_Host,
