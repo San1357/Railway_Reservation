@@ -2,10 +2,10 @@ from flask import Flask, jsonify, request
 
 import psycopg2
 
-DB_Host = "127.0.0.1"
+DB_Host = "localhost"
 DB_name = "myfirstdatabase"
 DB_user = "postgres"
-DB_pass = "ranchi1357"
+DB_pass = "password"
 h = 0
 
 app = Flask(__name__)
