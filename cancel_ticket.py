@@ -27,7 +27,7 @@ class CancelTicket(Search):
         print(self.rows)
         print(type(self.rows))
         print("train no:", self.rows[7])
-        print("seat booked ", self.rows[9])
+        
 
         cur.execute(
             "select * from traindetail where train_no = %s", ([self.rows[7]])
@@ -42,7 +42,7 @@ class CancelTicket(Search):
                 self.pnr_no]))
         cur.execute(
             "update traindetail set avail_seat = %s + %s where train_no = %s", ([
-                self.rows2[5], self.rows[9], self.rows[7]
+                self.rows2[5], self.rows[7]
             ]))
         conn.commit()
         print("Your Ticket is  Cancelled!!!")
