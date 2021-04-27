@@ -1,5 +1,4 @@
 import psycopg2
-from book_ticket import Ticket
 from train_search import Search
 
 
@@ -16,7 +15,7 @@ conn = psycopg2.connect(
 cur = conn.cursor()
 
 
-class CancelTicket(Ticket, Search):
+class CancelTicket(Search):
     def __init__(self, pnr_no):
         self.pnr_no = pnr_no
         # super(CancelTicket, self).__init__(from_station, to_station, date)
@@ -28,8 +27,7 @@ class CancelTicket(Ticket, Search):
         # self.get_train_details()
         print("Pnr_no:", self.pnr_no)
         cur.execute(
-            "select * from passenger_details where pnr_number = %s", ([
-                self.pnr_no]))
+            "select * from passenger_details where pnr_number = %s", ([self.pnr_no]))
         self.rows = list(cur.fetchone())
         print(self.rows)
         print(type(self.rows))
@@ -56,11 +54,12 @@ class CancelTicket(Ticket, Search):
         print("ThankYou !! Visit Again!! ")
         return self.pnr_no
 
-
-ticket_cancel = CancelTicket(16183117212)
+'''
+ticket_cancel = CancelTicket(1618944043898834)
 ticket_cancel.get_cancel_ticket()
 
 print("cur is closed")
 cur.close()
 print("conn is closed")
 conn.close()
+'''
