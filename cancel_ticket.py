@@ -17,11 +17,11 @@ cur = conn.cursor()
 
 
 class CancelTicket(Search):
+
     def __init__(self, pnr_no):
         self.pnr_no = pnr_no
-        
+
     def get_cancel_ticket(self):
-        
         print("Pnr_no:", self.pnr_no)
         incrementby1 = 1
         cur.execute(
@@ -50,6 +50,7 @@ class CancelTicket(Search):
         print("Your Ticket is  Cancelled!!!")
         print("ThankYou !! Visit Again!! ")
         return self.pnr_no
+
 
 '''
 ticket_cancel = CancelTicket(1618944043898834)
