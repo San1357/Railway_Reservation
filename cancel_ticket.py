@@ -1,4 +1,5 @@
 import psycopg2
+# from multiple_booking_ticket import MultipleBooking
 from train_search import Search
 
 
@@ -20,14 +21,15 @@ class CancelTicket(Search):
         self.pnr_no = pnr_no
         
     def get_cancel_ticket(self):
+        
         print("Pnr_no:", self.pnr_no)
+        incrementby1 = 1
         cur.execute(
             "select * from passenger_details where pnr_number = %s", ([self.pnr_no]))
         self.rows = list(cur.fetchone())
         print(self.rows)
         print(type(self.rows))
         print("train no:", self.rows[7])
-        
 
         cur.execute(
             "select * from traindetail where train_no = %s", ([self.rows[7]])
@@ -42,7 +44,7 @@ class CancelTicket(Search):
                 self.pnr_no]))
         cur.execute(
             "update traindetail set avail_seat = %s + %s where train_no = %s", ([
-                self.rows2[5], self.rows[7]
+                self.rows2[5], incrementby1, self.rows[7]
             ]))
         conn.commit()
         print("Your Ticket is  Cancelled!!!")
