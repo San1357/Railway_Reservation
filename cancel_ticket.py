@@ -18,13 +18,8 @@ cur = conn.cursor()
 class CancelTicket(Search):
     def __init__(self, pnr_no):
         self.pnr_no = pnr_no
-        # super(CancelTicket, self).__init__(from_station, to_station, date)
-        # self.no_of_seat_for_booking = no_of_seat_for_booking
-
+        
     def get_cancel_ticket(self):
-        # self.train_search()
-        # print ("hi:", self.traindetail_info)
-        # self.get_train_details()
         print("Pnr_no:", self.pnr_no)
         cur.execute(
             "select * from passenger_details where pnr_number = %s", ([self.pnr_no]))
