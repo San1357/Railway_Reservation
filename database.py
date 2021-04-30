@@ -14,3 +14,6 @@ class Database:
 
     def update_DB_train_detail(self, avail_seat, train_no):
         pass
+
+    def update_passengerdetail(self, passenger_detail_list_of_tuple):
+        pass
