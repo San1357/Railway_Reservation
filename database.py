@@ -17,3 +17,6 @@ class Database:
 
     def update_passengerdetail(self, passenger_detail_list_of_tuple):
         pass
+
+    def all_from_passenger_info(self, pnr_no):
+        pass
