@@ -31,14 +31,14 @@ class Database:
         self.avail_seat = f[5]
         self.train_no = f[2]
         print("train_no:", self.train_no)
-        print("f:",f)
+        print("f:", f)
         return f
 
     def update_DB_train_detail(self, avail_seat, train_no):
         self.cur.execute("update traindetail set avail_seat = %s where train_no = %s", (
             avail_seat, train_no))
         g = self.conn.commit()
-        print("g:",g)
+        print("g:", g)
         return g
 
     def update_passengerdetail(self, passenger_detail_list_of_tuple):
@@ -50,7 +50,7 @@ class Database:
         self.cur.execute(
             "select * from passenger_details where pnr_number = %s", ([pnr_no]))
         a = list(self.cur.fetchone())
-        print("a:",a)
+        print("a:", a)
         return a
 
     def all_from_train_Details(self, train_no):
