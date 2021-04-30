@@ -20,3 +20,9 @@ class Database:
 
     def all_from_passenger_info(self, pnr_no):
         pass
+
+    def all_from_train_Details(self, train_no):
+        pass
+
+    def delete_row_from_passenger_details(self, pnr_no):
+        pass
