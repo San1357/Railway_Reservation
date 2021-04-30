@@ -1,3 +1,6 @@
+from database import Database
+
+
 class Search():
     def __init__(self, from_station, to_station, date):
         self.from_station = from_station
