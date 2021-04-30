@@ -1,7 +1,7 @@
-from train_search import Search
+from database import Database
 
 
-class CancelTicket(Search):
+class CancelTicket():
 
     def __init__(self, pnr_no):
         self.pnr_no = pnr_no
