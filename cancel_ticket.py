@@ -1,4 +1,3 @@
-import psycopg2
 from train_search import Search
 
 
