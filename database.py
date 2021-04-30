@@ -4,8 +4,17 @@ import psycopg2
 class Database:
 
     def __init__(self):
-        pass
+        DB_Host = "localhost"
+        DB_name = "myfirstdatabase"
+        DB_user = "postgres"
+        DB_pass = "password"
 
+        self.conn = psycopg2.connect(
+            host=DB_Host,
+            database=DB_name,
+            user=DB_user,
+            password=DB_pass)
+        self.cur = self.conn.cursor()
     def get_DB_Train_Details(self, fromstation, tostation):
        pass
 
