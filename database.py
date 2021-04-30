@@ -48,11 +48,22 @@ class Database:
         self.cur.executemany("insert into passenger_details(name, email, age, aadhaar_no, fromstation, tostation, class, train_no, pnr_number)values(%s, %s,%s, %s,%s, %s, %s, %s, %s)", self.passenger_detail_list_of_tuple)
         h = self.conn.commit()
         return h
+
     def all_from_passenger_info(self, pnr_no):
-        pass
+        self.pnr_no = pnr_no
+        self.cur.execute(
+            "select * from passenger_details where pnr_number = %s", ([self.pnr_no]))
+        a = list(self.cur.fetchone())
+        return a
 
     def all_from_train_Details(self, train_no):
-        pass
+        self.train_no = train_no
+        self.cur.execute(
+            "select * from traindetail where train_no = %s", ([self.train_no])
+        )
+        b = list(self.cur.fetchone())
+        return b
+
 
     def delete_row_from_passenger_details(self, pnr_no):
         pass
