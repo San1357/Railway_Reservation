@@ -4,20 +4,6 @@ from database import Database
 global db
 db = Database()
 
-DB_Host = "localhost"
-# DB_Host = "0.0.0.0"
-DB_name = "myfirstdatabase"
-DB_user = "postgres"
-DB_pass = "password"
-h = 0
-
-conn = psycopg2.connect(
-    host=DB_Host,
-    database=DB_name,
-    user=DB_user,
-    password=DB_pass)
-cur = conn.cursor()
-
 
 class MultipleBooking:
 
