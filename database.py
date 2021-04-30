@@ -27,7 +27,12 @@ class Database:
         return e
 
     def get_DB_avail_seats(self, train_no):
-        pass
+        self.train_no = train_no
+        self.cur.execute("select * from traindetail where train_no = %s", ([
+            self.train_no]))
+        f = list(self.cur.fetchone())
+        print(f)
+        return f
 
     def update_DB_train_detail(self, avail_seat, train_no):
         pass
