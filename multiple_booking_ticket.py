@@ -51,12 +51,8 @@ class MultipleBooking:
         print("available seat:", self.avail_seat)
         return self.avail_seat
 
-
     def update_traindetail(self):
-        cur.execute("update traindetail set avail_seat = %s where train_no = %s", (
-            self.avail_seat, self.train_no))
-
-        conn.commit()
+        db.update_DB_train_detail(self.avail_seat, self.train_no)
 
     def pnr_generator(self):
         ct = datetime.datetime.now()
@@ -81,8 +77,7 @@ class MultipleBooking:
         for t in range(0, self.no_of_seat):
             self.passenger_detail_list_of_tuple[t] = self.passenger_detail_list_of_tuple[t] + self.pnr_list_value[t]
         print("Passenger detail(including Pnr number):", self.passenger_detail_list_of_tuple)
-        cur.executemany("insert into passenger_details(name, email, age, aadhaar_no, fromstation, tostation, class, train_no, pnr_number)values(%s, %s,%s, %s,%s, %s, %s, %s, %s)", self.passenger_detail_list_of_tuple)
-        conn.commit()
+        db.update_passengerdetail(self.passenger_detail_list_of_tuple)
 
     def book_seat(self):
         self.get_available_seat()
