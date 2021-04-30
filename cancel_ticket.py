@@ -1,19 +1,5 @@
 import psycopg2
-# from multiple_booking_ticket import MultipleBooking
 from train_search import Search
-
-
-DB_Host = "localhost"
-DB_name = "myfirstdatabase"
-DB_user = "postgres"
-DB_pass = "password"
-
-conn = psycopg2.connect(
-    host=DB_Host,
-    database=DB_name,
-    user=DB_user,
-    password=DB_pass)
-cur = conn.cursor()
 
 
 class CancelTicket(Search):
@@ -52,12 +38,5 @@ class CancelTicket(Search):
         return self.pnr_no
 
 
-'''
 ticket_cancel = CancelTicket(1618944043898834)
 ticket_cancel.get_cancel_ticket()
-
-print("cur is closed")
-cur.close()
-print("conn is closed")
-conn.close()
-'''
