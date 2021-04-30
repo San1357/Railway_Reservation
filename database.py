@@ -8,3 +8,6 @@ class Database:
 
     def get_DB_Train_Details(self, fromstation, tostation):
        pass
+
+    def get_DB_avail_seats(self, train_no):
+        pass
