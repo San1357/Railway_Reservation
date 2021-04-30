@@ -18,11 +18,8 @@ class Search():
         search_list.append(self.to_station)
         search_list.append(self.date)
         print(search_list)
-
-        cur.execute(
-            "select * from traindetail where fromstation=%s and tostation=%s",
-            (self.from_station, self.to_station))
-        self.traindetail_info = list(cur.fetchone())
+        db = Database()
+        self.traindetail_info = db.get_DB_Train_Details(self.from_station, self.to_station)
 
         print(self.traindetail_info)
         print(type(self.traindetail_info))
