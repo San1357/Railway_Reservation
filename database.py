@@ -35,11 +35,19 @@ class Database:
         return f
 
     def update_DB_train_detail(self, avail_seat, train_no):
-        pass
+        self.avail_seat = avail_seat
+        self.train_no = train_no
+        self.cur.execute("update traindetail set avail_seat = %s where train_no = %s", (
+            self.avail_seat, self.train_no))
+
+        g = self.conn.commit()
+        return g
 
     def update_passengerdetail(self, passenger_detail_list_of_tuple):
-        pass
-
+        self.passenger_detail_list_of_tuple = passenger_detail_list_of_tuple
+        self.cur.executemany("insert into passenger_details(name, email, age, aadhaar_no, fromstation, tostation, class, train_no, pnr_number)values(%s, %s,%s, %s,%s, %s, %s, %s, %s)", self.passenger_detail_list_of_tuple)
+        h = self.conn.commit()
+        return h
     def all_from_passenger_info(self, pnr_no):
         pass
 
