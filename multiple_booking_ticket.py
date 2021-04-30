@@ -29,7 +29,7 @@ class MultipleBooking:
         print("From Station:", self.from_station)
         print("To Station:", self.to_station)
 
-        print("-----------passenger_details(list_of_tuple-------------------")
+        print("-----------passenger_details(list_of_tuple)-------------------")
         self.passenger_detail_list_of_tuple = []
 
         for i in self.passenger_details:
