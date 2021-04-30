@@ -8,14 +8,13 @@ class CancelTicket():
 
     def get_cancel_ticket(self):
         print("Pnr_no:", self.pnr_no)
-        incrementby1 = 1
-        cur.execute(
-            "select * from passenger_details where pnr_number = %s", ([self.pnr_no]))
-        self.rows = list(cur.fetchone())
+        
+        db = Database()
+        self.rows = db.all_from_passenger_info(self.pnr_no)
         print(self.rows)
         print(type(self.rows))
         print("train no:", self.rows[7])
-
+        
         cur.execute(
             "select * from traindetail where train_no = %s", ([self.rows[7]])
         )
