@@ -68,14 +68,12 @@ class Search():
                 return results
 
 
-'''
-print("---------------Class Init started---------------")
-search_train_object = Search("Noida", "Gorakhpur", "12-03-2021")
-print("---------------train_Search()--------------")
-search_train_object.train_search()
-print("---------------get_train_Details()--------------")
-search_train_object.get_train_details()
-print("---------------Train_Schedule()--------------")
-search_train_object.train_schedule()
-cur.close()
-conn.close() '''
+if __name__ == "__main__":
+    print("---------------Class Init started---------------")
+    search_train_object = Search("Noida", "Gorakhpur", "12-03-2021")
+    print("---------------train_Search()--------------")
+    search_train_object.train_search()
+    print("---------------get_train_Details()--------------")
+    search_train_object.get_train_details()
+    print("---------------Train_Schedule()--------------")
+    search_train_object.train_schedule()
