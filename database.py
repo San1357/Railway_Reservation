@@ -15,8 +15,16 @@ class Database:
             user=DB_user,
             password=DB_pass)
         self.cur = self.conn.cursor()
+
     def get_DB_Train_Details(self, fromstation, tostation):
-       pass
+        self.from_station = fromstation
+        self.to_station = tostation
+        self.cur.execute(
+            "select * from traindetail where fromstation = %s and tostation = %s",
+            (self.from_station, self.to_station))
+        e = list(self.cur.fetchone())
+        print(e)
+        return e
 
     def get_DB_avail_seats(self, train_no):
         pass
