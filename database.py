@@ -11,3 +11,6 @@ class Database:
 
     def get_DB_avail_seats(self, train_no):
         pass
+
+    def update_DB_train_detail(self, avail_seat, train_no):
+        pass
