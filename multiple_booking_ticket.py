@@ -1,8 +1,8 @@
 import datetime
-import psycopg2
-import psycopg2.extras
 from flask import jsonify
-
+from database import Database
+global db
+db = Database()
 
 DB_Host = "localhost"
 # DB_Host = "0.0.0.0"
