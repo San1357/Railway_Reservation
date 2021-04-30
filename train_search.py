@@ -1,18 +1,3 @@
-import psycopg2
-import psycopg2.extras
-
-DB_Host = "localhost"
-DB_name = "myfirstdatabase"
-DB_user = "postgres"
-DB_pass = "password"
-
-conn = psycopg2.connect(
-    host=DB_Host, database=DB_name, user=DB_user, password=DB_pass)
-
-
-cur = conn.cursor()
-
-
 class Search():
     def __init__(self, from_station, to_station, date):
         self.from_station = from_station
