@@ -7,7 +7,6 @@ class MultipleBooking:
     def __init__(self):
         self.db = Database()
 
-
     def parsing(self, req_json):
         self.request = {}
         self.no_of_seat = 0
