@@ -1,5 +1,25 @@
 import psycopg2
+import datetime
 
+def pnr_generator(no_of_seat):
+    
+    ct = datetime.datetime.now()
+
+    pnr_list_value_as_tuple = ()
+    pnr_list_value = []
+    pnr = int((ct.timestamp() * 1000000))
+    for b in range(0, no_of_seat):
+        b = (b + pnr)
+        emptytuple = ()
+        pnr_list_value_as_tuple = emptytuple + (b,)
+        print("PNR Number(in tuple form):", pnr_list_value_as_tuple)
+        pnr_list_value.append(pnr_list_value_as_tuple)
+        print("Pnr Number:", pnr_list_value)
+
+    print("Pnr Number(in List of tuple form) :", pnr_list_value)
+    print(pnr_list_value)
+    print("Your PNR NUMBER IS:", pnr_list_value)
+    return pnr_list_value
 
 class Database:
 
@@ -42,6 +62,7 @@ class Database:
         return g
 
     def update_passengerdetail(self, passenger_detail_list_of_tuple):
+        passenger_detail_list_of_tuple
         self.cur.executemany("insert into passenger_details(name, email, age, aadhaar_no, fromstation, tostation, class, train_no, pnr_number)values(%s, %s,%s, %s,%s, %s, %s, %s, %s)", passenger_detail_list_of_tuple)
         h = self.conn.commit()
         return h
@@ -79,15 +100,22 @@ class Database:
 
 
 if __name__ == "__main__":
-
+    
+    pnr_list_value = pnr_generator(1)
+    passenger_detail_list_of_tuple = [('jeet', 'jeet105@gmail.com', 19, 1491041, 'Noida', 'Gorakhpur', 'General', 12110,)]
+    print(passenger_detail_list_of_tuple)
+    print(pnr_list_value)
+    passenger_detail_list_of_tuple[0] = passenger_detail_list_of_tuple[0] + pnr_list_value[0]
     db = Database()
     db.get_DB_Train_Details("Gorakhpur", "Pune")
     db.get_DB_avail_seats(12110)
     db.update_DB_train_detail(22, 12110)
-    db.update_passengerdetail()
-    db.all_from_passenger_info(1619503684260296)
+    db.update_passengerdetail(passenger_detail_list_of_tuple)
+    db.all_from_passenger_info(1619692464584002)
     db.all_from_train_Details(12110)
-    db.all_from_passenger_info(1619503684260296)
+    db.all_from_passenger_info(1619692464584002)
     db.all_from_train_Details(12110)
-    db.delete_row_from_passenger_details(1619503684260296)
+    db.delete_row_from_passenger_details(1619692464584002)
+
+
     db.update_traindetail(22, 12110)
