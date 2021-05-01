@@ -1,10 +1,9 @@
 import psycopg2
 import datetime
 
-def pnr_generator(no_of_seat):
-    
-    ct = datetime.datetime.now()
 
+def pnr_generator(no_of_seat):
+    ct = datetime.datetime.now()
     pnr_list_value_as_tuple = ()
     pnr_list_value = []
     pnr = int((ct.timestamp() * 1000000))
