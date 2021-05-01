@@ -20,6 +20,7 @@ def pnr_generator(no_of_seat):
     print("Your PNR NUMBER IS:", pnr_list_value)
     return pnr_list_value
 
+
 class Database:
 
     def __init__(self):
@@ -99,7 +100,7 @@ class Database:
 
 
 if __name__ == "__main__":
-    
+
     pnr_list_value = pnr_generator(1)
     passenger_detail_list_of_tuple = [('jeet', 'jeet105@gmail.com', 19, 1491041, 'Noida', 'Gorakhpur', 'General', 12110,)]
     print(passenger_detail_list_of_tuple)
@@ -115,6 +116,4 @@ if __name__ == "__main__":
     db.all_from_passenger_info(1619692464584002)
     db.all_from_train_Details(12110)
     db.delete_row_from_passenger_details(1619692464584002)
-
-
     db.update_traindetail(22, 12110)
