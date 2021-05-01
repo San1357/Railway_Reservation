@@ -1,16 +1,4 @@
-import psycopg2
-import psycopg2.extras
-
-DB_Host = "localhost"
-DB_name = "myfirstdatabase"
-DB_user = "postgres"
-DB_pass = "password"
-
-conn = psycopg2.connect(
-    host=DB_Host, database=DB_name, user=DB_user, password=DB_pass)
-
-
-cur = conn.cursor()
+from database import Database
 
 
 class Search():
@@ -30,11 +18,8 @@ class Search():
         search_list.append(self.to_station)
         search_list.append(self.date)
         print(search_list)
-
-        cur.execute(
-            "select * from traindetail where fromstation=%s and tostation=%s",
-            (self.from_station, self.to_station))
-        self.traindetail_info = list(cur.fetchone())
+        db = Database()
+        self.traindetail_info = db.get_DB_Train_Details(self.from_station, self.to_station)
 
         print(self.traindetail_info)
         print(type(self.traindetail_info))
@@ -83,14 +68,12 @@ class Search():
                 return results
 
 
-'''
-print("---------------Class Init started---------------")
-search_train_object = Search("Noida", "Gorakhpur", "12-03-2021")
-print("---------------train_Search()--------------")
-search_train_object.train_search()
-print("---------------get_train_Details()--------------")
-search_train_object.get_train_details()
-print("---------------Train_Schedule()--------------")
-search_train_object.train_schedule()
-cur.close()
-conn.close() '''
+if __name__ == "__main__":
+    print("---------------Class Init started---------------")
+    search_train_object = Search("Noida", "Gorakhpur", "12-03-2021")
+    print("---------------train_Search()--------------")
+    search_train_object.train_search()
+    print("---------------get_train_Details()--------------")
+    search_train_object.get_train_details()
+    print("---------------Train_Schedule()--------------")
+    search_train_object.train_schedule()

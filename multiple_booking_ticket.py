@@ -1,25 +1,11 @@
 import datetime
-import psycopg2
-import psycopg2.extras
 from flask import jsonify
-
-
-DB_Host = "localhost"
-# DB_Host = "0.0.0.0"
-DB_name = "myfirstdatabase"
-DB_user = "postgres"
-DB_pass = "password"
-h = 0
-
-conn = psycopg2.connect(
-    host=DB_Host,
-    database=DB_name,
-    user=DB_user,
-    password=DB_pass)
-cur = conn.cursor()
+from database import Database
 
 
 class MultipleBooking:
+    def __init__(self):
+        self.db = Database()
 
     def parsing(self, req_json):
         self.request = {}
@@ -43,7 +29,7 @@ class MultipleBooking:
         print("From Station:", self.from_station)
         print("To Station:", self.to_station)
 
-        print("-----------passenger_details(list_of_tuple-------------------")
+        print("-----------passenger_details(list_of_tuple)-------------------")
         self.passenger_detail_list_of_tuple = []
 
         for i in self.passenger_details:
@@ -60,18 +46,13 @@ class MultipleBooking:
 
     def get_available_seat(self):
         self.avail_seat = 0
-        cur.execute("select * from traindetail where train_no = %s", ([
-            self.train_no]))
-        self.rows = list(cur.fetchone())
+        self.rows = self.db.get_DB_avail_seats(self.train_no)
         self.avail_seat = self.rows[5]
         print("available seat:", self.avail_seat)
         return self.avail_seat
 
     def update_traindetail(self):
-        cur.execute("update traindetail set avail_seat = %s where train_no = %s", (
-            self.avail_seat, self.train_no))
-
-        conn.commit()
+        self.db.update_DB_train_detail(self.avail_seat, self.train_no)
 
     def pnr_generator(self):
         ct = datetime.datetime.now()
@@ -96,8 +77,7 @@ class MultipleBooking:
         for t in range(0, self.no_of_seat):
             self.passenger_detail_list_of_tuple[t] = self.passenger_detail_list_of_tuple[t] + self.pnr_list_value[t]
         print("Passenger detail(including Pnr number):", self.passenger_detail_list_of_tuple)
-        cur.executemany("insert into passenger_details(name, email, age, aadhaar_no, fromstation, tostation, class, train_no, pnr_number)values(%s, %s,%s, %s,%s, %s, %s, %s, %s)", self.passenger_detail_list_of_tuple)
-        conn.commit()
+        self.db.update_passengerdetail(self.passenger_detail_list_of_tuple)
 
     def book_seat(self):
         self.get_available_seat()
@@ -129,12 +109,12 @@ class MultipleBooking:
         return jsonify(result)
 
 
-'''ticket_booking_object = MultipleBooking()
-ticket_booking_object.parsing()
-# ticket_booking_object.get_available_seat()
-# ticket_booking_object.update_traindetail()
-# ticket_booking_object.pnr_generator()
-# ticket_booking_object.update_passenger_info()
-ticket_booking_object.book_seat()
-ticket_booking_object.create_response()
-'''
+if __name__ == "__main__":
+    ticket_booking_object = MultipleBooking()
+    ticket_booking_object.parsing()
+    ticket_booking_object.get_available_seat()
+    ticket_booking_object.update_traindetail()
+    ticket_booking_object.pnr_generator()
+    ticket_booking_object.update_passenger_info()
+    ticket_booking_object.book_seat()
+    ticket_booking_object.create_response()
