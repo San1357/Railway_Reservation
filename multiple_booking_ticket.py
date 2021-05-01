@@ -1,11 +1,12 @@
 import datetime
 from flask import jsonify
 from database import Database
-global db
-db = Database()
 
 
 class MultipleBooking:
+    def __init__(self):
+        self.db = Database()
+
 
     def parsing(self, req_json):
         self.request = {}
@@ -46,13 +47,13 @@ class MultipleBooking:
 
     def get_available_seat(self):
         self.avail_seat = 0
-        self.rows = db.get_DB_avail_seats(self.train_no)
+        self.rows = self.db.get_DB_avail_seats(self.train_no)
         self.avail_seat = self.rows[5]
         print("available seat:", self.avail_seat)
         return self.avail_seat
 
     def update_traindetail(self):
-        db.update_DB_train_detail(self.avail_seat, self.train_no)
+        self.db.update_DB_train_detail(self.avail_seat, self.train_no)
 
     def pnr_generator(self):
         ct = datetime.datetime.now()
@@ -77,7 +78,7 @@ class MultipleBooking:
         for t in range(0, self.no_of_seat):
             self.passenger_detail_list_of_tuple[t] = self.passenger_detail_list_of_tuple[t] + self.pnr_list_value[t]
         print("Passenger detail(including Pnr number):", self.passenger_detail_list_of_tuple)
-        db.update_passengerdetail(self.passenger_detail_list_of_tuple)
+        self.db.update_passengerdetail(self.passenger_detail_list_of_tuple)
 
     def book_seat(self):
         self.get_available_seat()
