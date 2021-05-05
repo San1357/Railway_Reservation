@@ -72,22 +72,35 @@ I have create 3 databases Named PassengerInfo, Train_Detail, Pnr_store .
     It store the information like Status of Pnr Confirmed , Not Confirmed.
 
 
-
+``
 
 How TO Run this project :
 step1 : open your Terminal
+        $ ctrl + alt + T
 
 step2 : git clone this project (by this command):
+
         $ git clone https://github.com/San1357/Railway_Reservation.git
 
-step3 : Now run the docker-compose file 
-        $ docker-compose up build 
+step3 : Now run the docker-compose file
 
-        --> this command will  build image through dockerfile 
-        --> &  Run the flask with database connection together
-        --> it will give u localhost like this http://0.0.0.0:5000
-        --> it will give u mesage like database system is ready to accept connection( which means you can now connect the database.)
-        --> Now I connect the database in pgadmin by entering connection details like (host, database name, user_name, & password( this thing you can found on docker-compose.yml file)).
+        $ docker-compose up build 
+        
+        what this command do & give:
+
+            * this command will  build image through dockerfile 
+
+            * & Run the flask with database connection together
+            
+            * it will give u localhost like this http://0.0.0.0:5000
+        
+            * it will give u mesage like database system is ready to accept connection( which means you can now connect the database.)
+            
+            * Now I connect the database in pgadmin by entering connection details like (host, database name, user_name, & password( this thing you can found on docker-compose.yml file)).
+
+step4 : exit the container 
+        
+        $ docker-compose down 
 
 Note: if you want to run some other files you have to make changes in dockerfile :
        - In line 22 changes the filename with your filename which you want to run that's it .
