@@ -24,10 +24,10 @@ def pnr_generator(no_of_seat):
 class Database:
 
     def __init__(self):
-        DB_Host = "Database"
-        DB_name = "My_Database"
-        DB_user = "My_Database"
-        DB_pass = "postgres"
+        DB_Host = "localhost"
+        DB_name = "myfirstdatabase"
+        DB_user = "postgres"
+        DB_pass = "password"
 
         self.conn = psycopg2.connect(
             host=DB_Host,
@@ -98,17 +98,14 @@ class Database:
         o = self.conn.commit()
         return o
 
-    def pnr_of_pnr_status(self, i):
+    def pnr_of_pnr_status(self, pnr_nos):
 
         self.cur.execute(
-            "select status, pnrpresentstatus from pnr_store where pnr_no = %s;", ([i]))
+            "select status, pnrpresentstatus from pnr_store where pnr_no = %s;", (pnr_nos,))
 
-        print("cur : ", self.cur)
-        v = list(self.cur.fetchone())
-
-        print("v: ", v)
-
-        return v
+        pnr_status = self.cur.fetchone()
+        print("pnr status:", pnr_status)
+        return pnr_status
 
 
 if __name__ == "__main__":
