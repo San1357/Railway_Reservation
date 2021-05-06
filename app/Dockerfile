@@ -19,7 +19,8 @@ EXPOSE 5431
 
 # CMD ["flask"]
 
-ENTRYPOINT ["python", "multiple_booking_api.py"]
+ENTRYPOINT ["python", "main.py"]
+
 
 # docker build -t ubuntu_py3.6 .
 # docker run -it --rm --add-host="localhost:192.168.1.9" -p 5000:5000 --name demo ubuntu_py3.6 bash
