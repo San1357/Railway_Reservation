@@ -3,7 +3,6 @@ import pprint
 from multiple_booking_ticket import MultipleBooking
 from train_search import Search
 from cancel_ticket import CancelTicket
-from database import Database
 from pnr_status_check import PnrChecker
 
 
@@ -63,9 +62,6 @@ def cancel_ticket_api():
 
 @app.route('/pnr_connect', methods=['POST'])
 def pnrc_api():
-
-    f = ('Not confirmed', 'yes')
-    j = ('confirmed', 'yes')
     if request.method == 'POST':
         req_json = request.json
         pnr_nos = req_json['pnr_nos']
