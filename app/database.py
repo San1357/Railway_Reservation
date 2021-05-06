@@ -98,6 +98,18 @@ class Database:
         o = self.conn.commit()
         return o
 
+    def pnr_of_pnr_status(self, i):
+
+        self.cur.execute(
+            "select status, pnrpresentstatus from pnr_store where pnr_no = %s;", ([i]))
+
+        print("cur : ", self.cur)
+        v = list(self.cur.fetchone())
+
+        print("v: ", v)
+
+        return v
+
 
 if __name__ == "__main__":
 
@@ -117,3 +129,4 @@ if __name__ == "__main__":
     db.all_from_train_Details(12110)
     db.delete_row_from_passenger_details(1619692464584002)
     db.update_traindetail(22, 12110)
+    db.pnr_of_pnr_status(7934082101)
