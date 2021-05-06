@@ -7,8 +7,7 @@ This Project is in Rest Api form .
 
 What this Project do ?
 
-This Project is on Railway Reservation Which have some basic funtionality like Booking_Ticket,  Cancel_Ticket, Pnr_Generator, 
-Train_Search etc.
+This Project is on Railway Reservation Which have some basic funtionality like Booking_Ticket,  Cancel_Ticket, Pnr_Generator, Train_Search etc.
 
 
 1)  book_ticket.py :
@@ -84,7 +83,7 @@ step2 : git clone this project (by this command):
 
 step3 : Now run the docker-compose file
 
-        $ docker-compose up build 
+        $ docker-compose up --build 
         
         what this command do & give:
 
