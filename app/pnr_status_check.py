@@ -1,5 +1,6 @@
 from database import Database
 
+
 class PnrChecker:
     def __init__(self):
         self.db = Database()
@@ -8,7 +9,6 @@ class PnrChecker:
         h = self.db.pnr_of_pnr_status(pnr_nos)
         f = ('Not confirmed', 'yes')
         j = ('confirmed', 'yes')
-        #h = pnr_connect(pnr_nos)
         if h == f:
             print("h : ", h)
             print(f"{pnr_nos} is a valid Pnr number")
