@@ -4,6 +4,7 @@ from multiple_booking_ticket import MultipleBooking
 from train_search import Search
 from cancel_ticket import CancelTicket
 from database import Database
+from pnr_status_check import PnrChecker
 
 
 app = Flask(__name__)
@@ -15,7 +16,7 @@ def hello_world():
 
 
 @app.route('/multiple_bookings', methods=['POST'])
-def multiple_bookings():
+def multiple_bookings_api():
     if request.method == "POST":
         req_json = request.json
         pprint.pprint(req_json)  # pprint will print your response in response json format.
@@ -48,7 +49,7 @@ def search_api():
 
 
 @app.route('/_cancel_ticket', methods=['POST'])
-def _cancel_ticket():
+def cancel_ticket_api():
     if request.method == 'POST':
         req_json = request.json
         pnr_no = req_json['pnr_no']
@@ -60,56 +61,19 @@ def _cancel_ticket():
         return jsonify({"PNR Number": str(pnr_of_cancel_ticket), "Ticket Cancelled Status": True})
 
 
-@app.route('/pnr_connect/<int:a>')
-def pnr_connect(a):
-    db = Database()
-    db.pnr_of_pnr_status(a)
-
-
-@app.route('/pnr_connect', methods=['GET', 'POST'])
-def pnrc():
+@app.route('/pnr_connect', methods=['POST'])
+def pnrc_api():
 
     f = ('Not confirmed', 'yes')
     j = ('confirmed', 'yes')
     if request.method == 'POST':
         req_json = request.json
         pnr_nos = req_json['pnr_nos']
-        h = pnr_connect(pnr_nos)
-        if h == f:
-            print("h : ", h)
-            print(f"{pnr_nos} is a valid Pnr number")
-            result = {
-                "PNR NUMBER": pnr_nos,
-                "Status": "Valid",
-                "CNF STATUS": "Not Confirmed",
-                "Present": "This PNR number is present.",
-                "Overall Status": False
-            }
+        response = PnrChecker()
+        json_ify = jsonify(response.pnr_connect(pnr_nos))
 
-        if h == j:
-            print("h : ", h)
-            print(f"{pnr_nos} is a valid Pnr number")
-            result = {
-                "PNR NUMBER": pnr_nos,
-                "Status": "Valid",
-                "CNF STATUS": "Confirmed",
-                "Present": "This PNR number is present.",
-                "Overall Status": True
-            }
-        else:
-            print(None)
-            print(f"{pnr_nos} is Not a valid Pnr number")
-            result = {
-                "PNR NUMBER": pnr_nos,
-                "Status": "Not Valid",
-                "CNF STATUS": "Not Confirmed",
-                "Present": "This PNR number is not present.",
-                "Overall Status": None
-            }
-
-        response = jsonify(result)
-        print(response)
-        return response
+        print(json_ify)
+        return json_ify
     return jsonify({"response: Post Called"})
 
 
