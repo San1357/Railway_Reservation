@@ -115,3 +115,5 @@ class MultipleBooking:
         pnr_Id = self.db.get_pnr_Id_from_pnr_details(self.pnr_list_value)
         print(":PNR_ID", pnr_Id)
         print("type of PNR_ID", type(pnr_Id))
+        print("PASSENGER_ID:", self.uuid)
+        print("type of PASSENGER_ID:", type(uuid,))
