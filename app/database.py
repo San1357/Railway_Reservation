@@ -87,6 +87,12 @@ class Database:
         h = self.conn.commit()
         return h
 
+    def update_pnr_details(self, pnr_list_value):
+        self.cur.execute("insert into pnr_details(pnr_id, pnr_number) values(uuid_generate_v4(), %s)",(pnr_list_value))
+        wrq = self.conn.commit()
+        print("wrq:", wrq)
+        return wrq
+
     def all_from_passenger_info(self, pnr_no):
         self.cur.execute(
             "select * from passenger_details where pnr_number = %s", ([pnr_no]))
