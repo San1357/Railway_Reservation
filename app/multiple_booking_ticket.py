@@ -124,4 +124,15 @@ class MultipleBooking:
         print("U_id:", self.U_id)
         self.db.booking_details_database(self.U_id)
 
-    
+    def book_seat(self):
+        self.get_available_seat()
+
+        if self.no_of_seat < self.avail_seat:
+            self.avail_seat = self.avail_seat - self.no_of_seat
+            self.update_traindetail()
+            #self.pnr_generator()
+            #self.update_passenger_info()
+            self.status = "True"
+            return self.no_of_seat
+        else:
+            self.status = "False"
