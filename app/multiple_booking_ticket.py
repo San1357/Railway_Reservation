@@ -112,3 +112,6 @@ class MultipleBooking:
         Train_Id = self.db.get_trainId_from_traindetails(self.train_no)
         print("Train_id:",Train_Id)
         print("type of Train_id:",type(Train_Id))
+        pnr_Id = self.db.get_pnr_Id_from_pnr_details(self.pnr_list_value)
+        print(":PNR_ID", pnr_Id)
+        print("type of PNR_ID", type(pnr_Id))
