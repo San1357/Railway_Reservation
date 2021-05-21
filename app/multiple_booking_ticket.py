@@ -67,7 +67,7 @@ class MultipleBooking:
                 self.passenger_detail_list_of_tuple.append(passenger_record)
             else:
                 self.uuid = self.db.set_passenger_uid_for_user_details()
-                print("created uuid for new passenger_recorde",self.uuid)
+                print("created uuid for new passenger_record",self.uuid)
                 self.passenger_details_tuple = self.uuid + (name, age, email, aadhaar_no,)
                 print("passenger_detail_tuple :", self.passenger_details_tuple)
                 print("Data type of Passenger detail:", type(self.passenger_details_tuple))
