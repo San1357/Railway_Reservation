@@ -122,3 +122,5 @@ class MultipleBooking:
         print(UU_ID)
         self.U_id.append(UU_ID)
         print("U_id:", self.U_id)
+        self.db.booking_details_database(self.U_id)
+
