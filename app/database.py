@@ -144,6 +144,12 @@ class Database:
         print("eu:", eu)
         return eu
 
+     def all_from_booking_details(self, pnr_id):
+        self.cur.execute("select * from booking_details where pnr_id = %s", ([pnr_id]))
+        pu = list(self.cur.fetchone())
+        print("pu:", pu)
+        return pu
+
     def all_from_train_Details(self, train_no):
         self.cur.execute(
             "select * from traindetail where train_no = %s", ([train_no])
