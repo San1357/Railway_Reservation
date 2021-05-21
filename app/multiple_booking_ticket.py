@@ -152,3 +152,14 @@ class MultipleBooking:
             }
         print(result)
         # return jsonify(result)
+
+if __name__ == "__main__":
+    ticket_booking_object = MultipleBooking()
+    ticket_booking_object.parsing(req_json)
+    ticket_booking_object.get_available_seat()
+    ticket_booking_object.update_traindetail()
+    ticket_booking_object.pnr_generator()
+    #ticket_booking_object.update_passenger_info()
+    ticket_booking_object.book_seat()
+    ticket_booking_object.create_response()
+
