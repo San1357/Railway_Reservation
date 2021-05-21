@@ -108,3 +108,4 @@ class MultipleBooking:
 
         print("Pnr Number(in List of tuple form) :", self.pnr_list_value)
         print("Your PNR NUMBER IS:", self.pnr_list_value)
+        self.db.update_pnr_details(self.pnr_list_value)
