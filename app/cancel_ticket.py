@@ -9,10 +9,12 @@ class CancelTicket():
     def get_cancel_ticket(self):
         print("Pnr_no:", self.pnr_no)
         db = Database()
-        self.rows = db.all_from_passenger_info(self.pnr_no)
+        self.rows = db.all_from_pnr_details(self.pnr_no)
         print(self.rows)
         print(type(self.rows))
-        print("train no:", self.rows[7])
+        print("pnr_id:", self.rows[0])
+        #print("train id:", self.rows[5])
+        self.pnr_id = self.rows[0]
 
         self.train_no = self.rows[7]
         self.rows2 = db.all_from_train_Details(self.train_no)
