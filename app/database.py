@@ -93,6 +93,12 @@ class Database:
         print("wrq:", wrq)
         return wrq
 
+    def booking_details_database(self, U_id):
+        self.cur.executemany("insert into booking_details(passenger_uid, t_id, pnr_id) values(%s, %s, %s)", U_id)
+        yrq = self.conn.commit()
+        print("yrq:", yrq)
+        return yrq
+
     def all_from_passenger_info(self, pnr_no):
         self.cur.execute(
             "select * from passenger_details where pnr_number = %s", ([pnr_no]))
