@@ -124,3 +124,8 @@ class MultipleBooking:
         print("U_id:", self.U_id)
         self.db.booking_details_database(self.U_id)
 
+    def update_passenger_info(self):
+        for t in range(0, self.no_of_seat):
+            self.passenger_detail_list_of_tuple[t] = self.passenger_detail_list_of_tuple[t] + self.pnr_list_value[t]
+        print("Passenger detail(including Pnr number):", self.passenger_detail_list_of_tuple)
+       
