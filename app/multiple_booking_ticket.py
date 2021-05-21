@@ -78,3 +78,12 @@ class MultipleBooking:
             print("-----------------final list ---------------")
         print("Passenger_detail_list:", self.passenger_detail_list_of_tuple)
         print(type(self.passenger_detail_list_of_tuple))
+
+    def get_available_seat(self):
+        self.avail_seat = 0
+        self.rows = self.db.get_DB_avail_seats(self.train_no)
+        self.avail_seat = self.rows[5]
+        print("available seat:", self.avail_seat)
+        return self.avail_seat
+
+    
