@@ -22,9 +22,7 @@ class CancelTicket():
         print("train_id:", self.rows3[1])
         self.t_id = self.rows3[1]
 
-
-        self.train_no = self.rows[7]
-        self.rows2 = db.all_from_train_Details(self.train_no)
+        self.rows2 = db.all_from_train_Details(self.t_id)
 
         print(self.rows2)
         print(type(self.rows2))
@@ -33,12 +31,12 @@ class CancelTicket():
 
         db.delete_row_from_booking_details(self.pnr_id)
         db.delete_row_from_pnr_details(self.pnr_id)
-        db.update_traindetail(self.avail_seat, self.train_no)
+        db.update_traindetail(self.avail_seat, self.t_id)
         print("Your Ticket is  Cancelled!!!")
         print("ThankYou !! Visit Again!! ")
         return self.pnr_no
 
 
 if __name__ == "__main__":
-    ticket_cancel = CancelTicket(1619445211108681)
+    ticket_cancel = CancelTicket(1621591653936916)
     ticket_cancel.get_cancel_ticket()
