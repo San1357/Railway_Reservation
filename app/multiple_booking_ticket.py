@@ -58,4 +58,23 @@ class MultipleBooking:
             print("check_data:", check_data)
 
             is_present, self.uuid = self.db.check_person_is_present(name, age, email, aadhaar_no)
-        
+
+            if is_present:
+                print("UUID exist", self.uuid)
+                print("is_present:", is_present)
+                passenger_record = self.db.select_all_from_user_details(self.uuid)
+                print("passenger_record:", passenger_record)
+                self.passenger_detail_list_of_tuple.append(passenger_record)
+            else:
+                self.uuid = self.db.set_passenger_uid_for_user_details()
+                print("created uuid for new passenger_recorde",self.uuid)
+                self.passenger_details_tuple = self.uuid + (name, age, email, aadhaar_no,)
+                print("passenger_detail_tuple :", self.passenger_details_tuple)
+                print("Data type of Passenger detail:", type(self.passenger_details_tuple))
+                self.passenger_detail_list_of_tuple.append(self.passenger_details_tuple)
+                self.db.update_passengerdetail(self.passenger_detail_list_of_tuple)
+
+            print("is_present:", is_present, "UUID: ", self.uuid)
+            print("-----------------final list ---------------")
+        print("Passenger_detail_list:", self.passenger_detail_list_of_tuple)
+        print(type(self.passenger_detail_list_of_tuple))
