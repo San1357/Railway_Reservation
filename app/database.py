@@ -50,6 +50,12 @@ class Database:
         print("dt:", dt)
         return dt
 
+    def get_pnr_Id_from_pnr_details(self, pnr_list_value):
+        self.cur.execute("select pnr_id from pnr_details where pnr_number = %s", pnr_list_value)
+        op = (self.cur.fetchone())
+        print("op:", op)
+        return op
+
     def get_DB_avail_seats(self, train_no):
         self.cur.execute("select * from traindetail where train_no = %s", ([
             train_no]))
