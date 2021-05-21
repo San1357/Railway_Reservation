@@ -136,3 +136,19 @@ class MultipleBooking:
             return self.no_of_seat
         else:
             self.status = "False"
+
+    def create_response(self):
+        if self.status == "True":
+            a = 0
+            result = {
+                "status": "booked",
+                "no_of_seat_booked": str(self.no_of_seat)
+            }
+
+        elif self.status == "False":
+            result = {
+                "status": "not booked",
+                "no_of_seat_booked": str(0)
+            }
+        print(result)
+        # return jsonify(result)
