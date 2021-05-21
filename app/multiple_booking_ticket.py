@@ -88,4 +88,23 @@ class MultipleBooking:
 
     def update_traindetail(self):
         self.db.update_DB_train_detail(self.avail_seat, self.train_no)
+    
+    def pnr_generator(self):
+        ct = datetime.datetime.now()
 
+        self.pnr_list_value_as_tuple = ()
+        self.pnr_list_value = []
+        self.pnr = int((ct.timestamp() * 1000000))
+
+        for b in range(0, self.no_of_seat):
+            print("b1:", b)
+            b = (b + self.pnr)
+            print("b2:", b)
+            emptytuple = ()
+            self.pnr_list_value_as_tuple = emptytuple + (b,)
+            print("PNR Number(in tuple form):", self.pnr_list_value_as_tuple)
+            self.pnr_list_value.append(self.pnr_list_value_as_tuple)
+            print("Pnr Number:", self.pnr_list_value)
+
+        print("Pnr Number(in List of tuple form) :", self.pnr_list_value)
+        print("Your PNR NUMBER IS:", self.pnr_list_value)
