@@ -165,6 +165,14 @@ class Database:
         c = self.conn.commit()
         return c
 
+    def delete_row_from_booking_details(self, pnr_id):
+        self.cur.execute(
+            "delete from booking_details where pnr_id in (%s)", ([
+                pnr_id]))
+        cu = self.conn.commit()
+        return cu
+
+
     def update_traindetail(self, avail_seat, train_no):
         incrementby1 = 1
         self.cur.execute(
