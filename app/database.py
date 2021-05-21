@@ -56,13 +56,7 @@ class Database:
         print("op:", op)
         return op
 
-    def set_passenger_uid_for_user_details(self):
-        self.cur.execute("SELECT uuid_generate_v4(); ")
-        gt = self.cur.fetchone()
-        print("------------gt----------")
-        print("gt:", gt)
-        return gt
-
+    
     def get_DB_avail_seats(self, train_no):
         self.cur.execute("select * from traindetail where train_no = %s", ([
             train_no]))
@@ -72,6 +66,13 @@ class Database:
         print("train_no:", self.train_no)
         print("f:", f)
         return f
+
+    def set_passenger_uid_for_user_details(self):
+        self.cur.execute("SELECT uuid_generate_v4(); ")
+        gt = self.cur.fetchone()
+        print("------------gt----------")
+        print("gt:", gt)
+        return gt
 
     def update_DB_train_detail(self, avail_seat, train_no):
         self.cur.execute("update traindetail set avail_seat = %s where train_no = %s", (
