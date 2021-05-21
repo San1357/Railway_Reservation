@@ -109,6 +109,28 @@ class Database:
         passenger_record = self.cur.fetchone()
         return passenger_record
 
+    def check_person_is_present(self, name, age, email, aadhaar_no):
+        """
+        """
+        self.cur.execute("""
+        select * from user_details 
+        where name = %s and age = %s and email= %s and aadhaar_no = %s
+        """, 
+        (name, age, email, aadhaar_no))
+        passenger_record = self.cur.fetchone()
+        
+        print("passenger_record: ", passenger_record)
+        
+        if passenger_record == None:
+            uuid = None
+            is_present = False
+        else:
+            is_present = True
+            uuid, name, age, email, aadhaar_no = passenger_record
+
+        return is_present, uuid
+
+
     def all_from_passenger_info(self, pnr_no):
         self.cur.execute(
             "select * from passenger_details where pnr_number = %s", ([pnr_no]))
