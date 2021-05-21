@@ -56,4 +56,6 @@ class MultipleBooking:
 
             check_data = [(name, age, email, aadhaar_no,)]
             print("check_data:", check_data)
+
+            is_present, self.uuid = self.db.check_person_is_present(name, age, email, aadhaar_no)
         
