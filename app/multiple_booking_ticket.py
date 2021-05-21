@@ -42,4 +42,18 @@ class MultipleBooking:
         print("Train_No:", self.train_no)
         print("Data Type of Train_no:", type(self.train_no))
         print("no of Seat :", self.no_of_seat)
+
+
+        print("-----------passenger_details(list_of_tuple)-------------------")
+        self.passenger_detail_list_of_tuple = []
+        for pass_detail in self.passenger_details:
+
+            name = pass_detail['name']
+            age = pass_detail['age']
+            email = pass_detail['email']
+            aadhaar_no = pass_detail['aadhaar_no']
+            print('name:',name, 'age : ', age, 'email:', email, 'aadhaar_no:', aadhaar_no)
+
+            check_data = [(name, age, email, aadhaar_no,)]
+            print("check_data:", check_data)
         
