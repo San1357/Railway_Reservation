@@ -117,3 +117,4 @@ class MultipleBooking:
         print("type of PNR_ID", type(pnr_Id))
         print("PASSENGER_ID:", self.uuid)
         print("type of PASSENGER_ID:", type(uuid,))
+        UU_ID = ()
