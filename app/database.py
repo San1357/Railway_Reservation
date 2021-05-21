@@ -99,6 +99,16 @@ class Database:
         print("yrq:", yrq)
         return yrq
 
+    def select_all_from_user_details(self, uuid):
+        """
+        """
+        self.cur.execute("""
+        select * from user_details
+        where passenger_uid = %s
+        """, (uuid,))
+        passenger_record = self.cur.fetchone()
+        return passenger_record
+
     def all_from_passenger_info(self, pnr_no):
         self.cur.execute(
             "select * from passenger_details where pnr_number = %s", ([pnr_no]))
