@@ -16,6 +16,13 @@ class CancelTicket():
         #print("train id:", self.rows[5])
         self.pnr_id = self.rows[0]
 
+        self.rows3 = db.all_from_booking_details(self.pnr_id)
+        print(self.rows3)
+        print(type(self.rows3))
+        print("train_id:", self.rows3[1])
+        self.t_id = self.rows3[1]
+
+
         self.train_no = self.rows[7]
         self.rows2 = db.all_from_train_Details(self.train_no)
 
