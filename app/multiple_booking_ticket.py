@@ -86,4 +86,6 @@ class MultipleBooking:
         print("available seat:", self.avail_seat)
         return self.avail_seat
 
-    
+    def update_traindetail(self):
+        self.db.update_DB_train_detail(self.avail_seat, self.train_no)
+
