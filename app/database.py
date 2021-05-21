@@ -43,6 +43,12 @@ class Database:
         e = list(self.cur.fetchone())
         print(e)
         return e
+    
+    def get_trainId_from_traindetails(self, train_no):
+        self.cur.execute("select t_id from Train_details where train_no = %s", ([train_no]))
+        dt = (self.cur.fetchone())
+        print("dt:", dt)
+        return dt
 
     def get_DB_avail_seats(self, train_no):
         self.cur.execute("select * from traindetail where train_no = %s", ([
