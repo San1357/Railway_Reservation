@@ -32,6 +32,7 @@ class CancelTicket():
         self.avail_seat = self.rows2[5]
 
         db.delete_row_from_booking_details(self.pnr_id)
+        db.delete_row_from_pnr_details(self.pnr_id)
         db.update_traindetail(self.avail_seat, self.train_no)
         print("Your Ticket is  Cancelled!!!")
         print("ThankYou !! Visit Again!! ")
