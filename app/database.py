@@ -38,7 +38,7 @@ class Database:
             password=db_pass)
         self.cur = self.conn.cursor()
 
-    def get_db_train_details(self, fromstation, tostation):
+    def get_all_from_train_details(self, fromstation, tostation):
         self.cur.execute(
             "select * from Train_details where from_station = %s and to_station = %s",
             (fromstation, tostation))
@@ -189,7 +189,7 @@ if __name__ == "__main__":
     U_id = [('b6f9bcd7-400a-4b7e-a21b-b87c6f8e77fc', 'b6a936d9-6dfe-4d26-81df-c7912140e3ca', 'c8758945-f378-45d4-95bb-33d64df413af')]
     uuid = 'b6f9bcd7-400a-4b7e-a21b-b87c6f8e77fc'
     db = Database()
-    db.get_db_train_details("gkp", "pune")
+    db.get_all_from_train_details("gkp", "pune")
     db.get_train_id_from_traindetails(12110)
     db.get_pnr_id_from_pnr_details([(1621751452546704,)])
     db.set_passenger_uid_for_user_details()
