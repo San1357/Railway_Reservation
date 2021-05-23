@@ -19,37 +19,37 @@ class Search():
         search_list.append(self.date)
         print(search_list)
         db = Database()
-        self.Train_details_info = db.get_DB_Train_Details(self.from_station, self.to_station)
+        self.train_details_info = db.get_db_train_details(self.from_station, self.to_station)
 
-        print(self.Train_details_info)
-        print(type(self.Train_details_info))
-        print("t_id", self.Train_details_info[0])
-        print("from station:", self.Train_details_info[1])
-        print("to station:", self.Train_details_info[2])
-        print("train no: ", self.Train_details_info[3])
-        print("total no of seat:", self.Train_details_info[4])
-        print("available seat: ", self.Train_details_info[5])
-        print(type(self.Train_details_info[0]))
-        print(type(self.Train_details_info[1]))
-        print(type(self.Train_details_info[2]))
-        print(type(self.Train_details_info[3]))
-        print(type(self.Train_details_info[4]))
-        print(type(self.Train_details_info[5]))
+        print(self.train_details_info)
+        print(type(self.train_details_info))
+        print("t_id", self.train_details_info[0])
+        print("from station:", self.train_details_info[1])
+        print("to station:", self.train_details_info[2])
+        print("train no: ", self.train_details_info[3])
+        print("total no of seat:", self.train_details_info[4])
+        print("available seat: ", self.train_details_info[5])
+        print(type(self.train_details_info[0]))
+        print(type(self.train_details_info[1]))
+        print(type(self.train_details_info[2]))
+        print(type(self.train_details_info[3]))
+        print(type(self.train_details_info[4]))
+        print(type(self.train_details_info[5]))
 
     def get_train_details(self):
 
-        if self.Train_details_info is not None:
-            if self.Train_details_info[1] == self.from_station and self.Train_details_info[2] == self.to_station:
+        if self.train_details_info is not None:
+            if self.train_details_info[1] == self.from_station and self.train_details_info[2] == self.to_station:
                 print("** Here is your Train detail **")
-                print("Train_Id:", self.Train_details_info[0])
-                print("Train NO:", self.Train_details_info[3])
-                print("Total Seats are:", self.Train_details_info[4])
-                print("Available Seats are:", self.Train_details_info[5])
+                print("Train_Id:", self.train_details_info[0])
+                print("Train NO:", self.train_details_info[3])
+                print("Total Seats are:", self.train_details_info[4])
+                print("Available Seats are:", self.train_details_info[5])
                 result = {
-                    "Train_Id": self.Train_details_info[0],
-                    "Train_No": self.Train_details_info[3],
-                    "Total Seats are": self.Train_details_info[4],
-                    "Available Seats are": self.Train_details_info[5]}
+                    "Train_Id": self.train_details_info[0],
+                    "Train_No": self.train_details_info[3],
+                    "Total Seats are": self.train_details_info[4],
+                    "Available Seats are": self.train_details_info[5]}
                 return result
             else:
                 print(
@@ -57,10 +57,10 @@ class Search():
 
     def train_schedule(self):
 
-        if self.Train_details_info is not None:
-            if self.Train_details_info[1] == self. from_station and self.Train_details_info[2] == self.to_station:
+        if self.train_details_info is not None:
+            if self.train_details_info[1] == self. from_station and self.train_details_info[2] == self.to_station:
                 print("** Train Schedule **")
-                results = self.Train_details_info[6]
+                results = self.train_details_info[6]
                 print(results)
                 print(type(results))
                 for i in results:
