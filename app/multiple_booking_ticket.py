@@ -3,23 +3,21 @@ from flask import jsonify
 from database import Database
 
 import uuid
-import pprint
-
 
 req_json = {
             "train_no": 12110,
             "no_of_seat": 1,
             "passenger":
-                    [
+                        [
 
-                        {
-                            "name": "wsad",
-                            "email": "wsad105@gmail.com",
-                            "age": 19,
-                            "aadhaar_no": 421479
-                        }
-                    ]
-        }
+                            {
+                                "name": "adii",
+                                "email": "adii105@gmail.com",
+                                "age": 19,
+                                "aadhaar_no": 123455
+                            }
+                        ]
+            }
 
 
 class MultipleBooking:
@@ -27,107 +25,99 @@ class MultipleBooking:
         self.db = Database()
 
     def parsing(self, req_json):
-        self.request = {}
+        request = {}
         self.no_of_seat = 0
         self.train_no = 0
-        self.passenger_detail_list = []
-        self.request = req_json
+        request = req_json
 
-        self.passenger_details = self.request['passenger']
-        print("passenger:", self.passenger_details)
-        self.train_no = self.request['train_no']
-        self.no_of_seat = self.request['no_of_seat']
-    
+        passenger_details = request['passenger']
+        self.train_no = request['train_no']
+        self.no_of_seat = request['no_of_seat']
+        print("passenger:", passenger_details)
         print("--------------------------------")
         print("Train_No:", self.train_no)
         print("Data Type of Train_no:", type(self.train_no))
         print("no of Seat :", self.no_of_seat)
 
-        
         print("-----------passenger_details(list_of_tuple)-------------------")
-        self.passenger_detail_list_of_tuple = []
-        for pass_detail in self.passenger_details:
+        passenger_detail_list_of_tuple = []
+        for pass_detail in passenger_details:
 
             name = pass_detail['name']
             age = pass_detail['age']
             email = pass_detail['email']
             aadhaar_no = pass_detail['aadhaar_no']
-            print('name:',name, 'age : ', age, 'email:', email, 'aadhaar_no:', aadhaar_no)
-
             check_data = [(name, age, email, aadhaar_no,)]
+            print('name:', name, 'age : ', age, 'email:', email, 'aadhaar_no:', aadhaar_no)
             print("check_data:", check_data)
-            
+
             is_present, self.uuid = self.db.check_person_is_present(name, age, email, aadhaar_no)
 
             if is_present:
+                passenger_record = self.db.select_all_from_user_details(self.uuid)
+                passenger_detail_list_of_tuple.append(passenger_record)
                 print("UUID exist", self.uuid)
                 print("is_present:", is_present)
-                passenger_record = self.db.select_all_from_user_details(self.uuid)
                 print("passenger_record:", passenger_record)
-                self.passenger_detail_list_of_tuple.append(passenger_record)
-
-
             else:
                 self.uuid = self.db.set_passenger_uid_for_user_details()
-                print("created uuid for new passenger_record",self.uuid)
-                self.passenger_details_tuple = self.uui d + (name, age, email, aadhaar_no,)
-                print("passenger_detail_tuple :", self.passenger_details_tuple)
-                print("Data type of Passenger detail:", type(self.passenger_details_tuple))
-                self.passenger_detail_list_of_tuple.append(self.passenger_details_tuple)
-                self.db.update_passengerdetail(self.passenger_detail_list_of_tuple)
+                passenger_details_tuple = self.uuid + (name, age, email, aadhaar_no,)
+                passenger_detail_list_of_tuple.append(passenger_details_tuple)
+                self.db.insert_records_in_user_detail(passenger_detail_list_of_tuple)
+                print("created uuid for new passenger_record", self.uuid)
+                print("passenger_detail_tuple :", passenger_details_tuple)
+                print("Data type of Passenger detail:", type(passenger_details_tuple))
 
             print("is_present:", is_present, "UUID: ", self.uuid)
             print("-----------------final list ---------------")
-        print("Passenger_detail_list:", self.passenger_detail_list_of_tuple)
-        print(type(self.passenger_detail_list_of_tuple))
+        print("Passenger_detail_list:", passenger_detail_list_of_tuple)
+        print(type(passenger_detail_list_of_tuple))
 
     def get_available_seat(self):
         self.avail_seat = 0
-        self.rows = self.db.get_DB_avail_seats(self.train_no)
-        self.avail_seat = self.rows[5]
+        train_details = self.db.get_avail_seats_using_train_no(self.train_no)
+        self.avail_seat = train_details[5]
         print("available seat:", self.avail_seat)
-        return self.avail_seat
+        self.avail_seat
 
     def update_traindetail(self):
-        self.db.update_DB_train_detail(self.avail_seat, self.train_no)
+        self.db.update_available_seat_in_train_detail(self.avail_seat, self.train_no)
 
     def pnr_generator(self):
         ct = datetime.datetime.now()
 
-        self.pnr_list_value_as_tuple = ()
+        pnr_list_value_as_tuple = ()
         self.pnr_list_value = []
-        self.pnr = int((ct.timestamp() * 1000000))
+        generating_pnr = int((ct.timestamp() * 1000000))
 
-        for b in range(0, self.no_of_seat):
-            print("b1:", b)
-            b = (b + self.pnr)
-            print("b2:", b)
+        for pnr in range(0, self.no_of_seat):
             emptytuple = ()
-            self.pnr_list_value_as_tuple = emptytuple + (b,)
-            print("PNR Number(in tuple form):", self.pnr_list_value_as_tuple)
-            self.pnr_list_value.append(self.pnr_list_value_as_tuple)
-            print("Pnr Number:", self.pnr_list_value)
+            pnr = (pnr + generating_pnr)
+            pnr_list_value_as_tuple = emptytuple + (pnr,)
+            self.pnr_list_value.append(pnr_list_value_as_tuple)
+            print("generated pnr:", pnr)
+            print("PNR Number(in tuple form):", pnr_list_value_as_tuple)
 
         print("Pnr Number(in List of tuple form) :", self.pnr_list_value)
         print("Your PNR NUMBER IS:", self.pnr_list_value)
-        self.db.update_pnr_details(self.pnr_list_value)
-        Train_Id = self.db.get_trainId_from_traindetails(self.train_no)
-        print("Train_id:",Train_Id)
-        print("type of Train_id:",type(Train_Id))
-        pnr_Id = self.db.get_pnr_Id_from_pnr_details(self.pnr_list_value)
-        print(":PNR_ID", pnr_Id)
-        print("type of PNR_ID", type(pnr_Id))
+
+    def booking_ticket(self):
+        u_id = []
+        uu_id = ()
+        self.db.insert_pnr_details(self.pnr_list_value)
+        train_id = self.db.get_train_id_from_traindetails(self.train_no)
+        pnr_id = self.db.get_pnr_id_from_pnr_details(self.pnr_list_value)
+        uu_id = (self.uuid,) + train_id + pnr_id
+        u_id.append(uu_id)
+        self.db.insert_booking_details_database(u_id)
+        print("Train_id:", train_id)
+        print("type of Train_id:", type(train_id))
+        print(":PNR_ID", pnr_id)
+        print("type of PNR_ID", type(pnr_id))
         print("PASSENGER_ID:", self.uuid)
         print("type of PASSENGER_ID:", type(uuid,))
-        self.U_id = []
-        UU_ID = ()
-        UU_ID = (self.uuid,) + Train_Id + pnr_Id 
-        print(UU_ID)
-        self.U_id.append(UU_ID)
-        print("U_id:", self.U_id)
-        self.db.booking_details_database(self.U_id)
-
-        
+        print("uuid:", uu_id)
+        print("U_id:", u_id)
 
     def book_seat(self):
         self.get_available_seat()
@@ -135,16 +125,16 @@ class MultipleBooking:
         if self.no_of_seat < self.avail_seat:
             self.avail_seat = self.avail_seat - self.no_of_seat
             self.update_traindetail()
-            #self.pnr_generator()
-            #self.update_passenger_info()
+            # self.pnr_generator()
+            # self.update_passenger_info()
             self.status = "True"
-            return self.no_of_seat
+            self.no_of_seat
         else:
             self.status = "False"
 
     def create_response(self):
         if self.status == "True":
-            a = 0
+            # a = 0
             result = {
                 "status": "booked",
                 "no_of_seat_booked": str(self.no_of_seat)
@@ -156,7 +146,7 @@ class MultipleBooking:
                 "no_of_seat_booked": str(0)
             }
         print(result)
-        # return jsonify(result)
+        return jsonify(result)
 
 
 if __name__ == "__main__":
@@ -165,5 +155,6 @@ if __name__ == "__main__":
     ticket_booking_object.get_available_seat()
     ticket_booking_object.update_traindetail()
     ticket_booking_object.pnr_generator()
+    ticket_booking_object.booking_ticket()
     ticket_booking_object.book_seat()
     ticket_booking_object.create_response()
