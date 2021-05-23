@@ -58,7 +58,7 @@ class Database:
         print("pnr_id:", pnr_id)
         return pnr_id
 
-    def set_passenger_uid_for_user_details(self):
+    def generate_uuid_for_user_details(self):
         self.cur.execute("SELECT uuid_generate_v4(); ")
         generated_passenger_uid = self.cur.fetchone()
         print("------------generating_passenger_uid----------")
@@ -192,7 +192,7 @@ if __name__ == "__main__":
     db.get_all_from_train_details("gkp", "pune")
     db.get_train_id_from_traindetails(12110)
     db.get_pnr_id_from_pnr_details([(1621751452546704,)])
-    db.set_passenger_uid_for_user_details()
+    db.generate_uuid_for_user_details()
     db.get_avail_seats_using_train_no(12110)
     db.update_available_seat_in_train_detail(45, 12110)
     db.insert_records_in_user_detail([(str(myuuid), 'sunovada', 19, 'sunovada21@gmail.com', 821952,)])
