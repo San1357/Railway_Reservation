@@ -140,12 +140,6 @@ class Database:
         print("train_details_record:", train_details_record)
         return train_details_record
 
-    def delete_row_from_user_details(self, pnr_no):
-        self.cur.execute(
-            "delete from user_details where pnr_number in (%s)", ([
-                pnr_no]))
-        self.conn.commit()
-
     def delete_row_from_booking_details(self, pnr_id):
         self.cur.execute(
             "delete from booking_details where pnr_id in (%s)", ([
