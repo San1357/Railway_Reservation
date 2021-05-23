@@ -19,7 +19,7 @@ class Search():
         search_list.append(self.date)
         print("search_list:", search_list)
         db = Database()
-        self.train_details_info = db.get_db_train_details(self.from_station, self.to_station)
+        self.train_details_info = db.get_all_from_train_details(self.from_station, self.to_station)
 
         print(self.train_details_info)
         print(type(self.train_details_info))
