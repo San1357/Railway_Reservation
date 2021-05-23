@@ -68,12 +68,10 @@ class Database:
     def get_avail_seats_using_train_no(self, train_no):
         self.cur.execute("select * from Train_details where train_no = %s", ([
             train_no]))
-        f = list(self.cur.fetchone())
-        self.avail_seat = f[5]
-        self.train_no = f[3]
-        print("train_no:", self.train_no)
-        print("f:", f)
-        return f
+        getting_all_from_train_details = list(self.cur.fetchone())
+        avail_seat = getting_all_from_train_details[5]
+        print("avail_seat:", avail_seat)
+        return avail_seat
 
     def update_available_seat_in_train_detail(self, avail_seat, train_no):
         self.cur.execute("update Train_details set avail_seats = %s where train_no = %s", (
