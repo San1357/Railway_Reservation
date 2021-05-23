@@ -7,36 +7,31 @@ class CancelTicket():
         self.pnr_no = pnr_no
 
     def get_cancel_ticket(self):
-        print("Pnr_no:", self.pnr_no)
         db = Database()
-        self.rows = db.all_from_pnr_details(self.pnr_no)
-        print(self.rows)
-        print(type(self.rows))
-        print("pnr_id:", self.rows[0])
-        #print("train id:", self.rows[5])
-        self.pnr_id = self.rows[0]
-
-        self.rows3 = db.all_from_booking_details(self.pnr_id)
-        print(self.rows3)
-        print(type(self.rows3))
-        print("train_id:", self.rows3[1])
-        self.t_id = self.rows3[1]
-
-        self.rows2 = db.all_from_train_Details(self.t_id)
-
-        print(self.rows2)
-        print(type(self.rows2))
-        print("avail_seat", self.rows2[5])
-        self.avail_seat = self.rows2[5]
-
-        db.delete_row_from_booking_details(self.pnr_id)
-        db.delete_row_from_pnr_details(self.pnr_id)
-        db.update_traindetail(self.avail_seat, self.t_id)
+        pnr_details = db.all_from_pnr_details(self.pnr_no)
+        pnr_id = pnr_details[0]
+        booking_details = db.all_from_booking_details(pnr_id)
+        t_id = booking_details[1]
+        train_details = db.all_from_train_details(t_id)
+        db.delete_row_from_booking_details(pnr_id)
+        db.delete_row_from_pnr_details(pnr_id)
+        avail_seat = train_details[5]
+        db.update_seats_in_traindetail(avail_seat, t_id)
+        print("Pnr_no:", self.pnr_no)
+        print(pnr_details)
+        print(type(pnr_details))
+        print("pnr_id:", pnr_details[0])
+        print(booking_details)
+        print(type(booking_details))
+        print("train_id:", booking_details[1])
+        print(train_details)
+        print(type(train_details))
+        print("avail_seat", train_details[5])
         print("Your Ticket is  Cancelled!!!")
         print("ThankYou !! Visit Again!! ")
-        return self.pnr_no
+        self.pnr_no
 
 
 if __name__ == "__main__":
-    ticket_cancel = CancelTicket(1621521683805037)
+    ticket_cancel = CancelTicket(1621750529727682)
     ticket_cancel.get_cancel_ticket()
