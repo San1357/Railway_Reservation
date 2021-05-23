@@ -73,9 +73,6 @@ class MultipleBooking:
         print("Passenger_detail_list:", passenger_detail_list_of_tuple)
         print(type(passenger_detail_list_of_tuple))
 
-    def update_traindetail(self):
-        self.db.update_available_seat_in_train_details(self.avail_seat, self.train_no)
-
     def pnr_generator(self):
         ct = datetime.datetime.now()
 
@@ -120,7 +117,8 @@ class MultipleBooking:
 
         if self.no_of_seat < self.avail_seat:
             self.avail_seat = self.avail_seat - self.no_of_seat
-            self.update_traindetail()
+            self.db.update_available_seat_in_train_details(self.avail_seat, self.train_no)
+
             # self.pnr_generator()
             # self.update_passenger_info()
             self.status = "True"
@@ -148,7 +146,6 @@ class MultipleBooking:
 if __name__ == "__main__":
     ticket_booking_object = MultipleBooking()
     ticket_booking_object.parsing(req_json)
-    ticket_booking_object.update_traindetail()
     ticket_booking_object.pnr_generator()
     ticket_booking_object.booking_ticket()
     ticket_booking_object.book_seat()
