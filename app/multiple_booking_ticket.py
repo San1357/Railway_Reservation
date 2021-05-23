@@ -74,7 +74,7 @@ class MultipleBooking:
         print(type(passenger_detail_list_of_tuple))
 
     def update_traindetail(self):
-        self.db.update_available_seat_in_train_detail(self.avail_seat, self.train_no)
+        self.db.update_available_seat_in_train_details(self.avail_seat, self.train_no)
 
     def pnr_generator(self):
         ct = datetime.datetime.now()
@@ -97,12 +97,12 @@ class MultipleBooking:
     def booking_ticket(self):
         u_id = []
         uu_id = ()
-        self.db.insert_pnr_details(self.pnr_list_value)
+        self.db.insert_records_in_pnr_details(self.pnr_list_value)
         train_id = self.db.get_train_id_from_traindetails(self.train_no)
         pnr_id = self.db.get_pnr_id_from_pnr_details(self.pnr_list_value)
         uu_id = (self.uuid,) + train_id + pnr_id
         u_id.append(uu_id)
-        self.db.insert_booking_details_database(u_id)
+        self.db.insert_records_in_booking_details(u_id)
         print("Train_id:", train_id)
         print("type of Train_id:", type(train_id))
         print(":PNR_ID", pnr_id)
