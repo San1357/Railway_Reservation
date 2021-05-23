@@ -73,26 +73,24 @@ class Database:
         print("avail_seat:", avail_seat)
         return avail_seat
 
-    def update_available_seat_in_train_detail(self, avail_seat, train_no):
+    def update_available_seat_in_train_details(self, avail_seat, train_no):
         self.cur.execute("update Train_details set avail_seats = %s where train_no = %s", (
             avail_seat, train_no))
-        updated_avail_seats = self.conn.commit()
-        return updated_avail_seats
+        self.conn.commit()
+        
 
     def insert_records_in_user_detail(self, passenger_detail_list_of_tuple):
         self.cur.executemany("insert into user_details(passenger_uid, name, age, email, aadhaar_no)values(%s, %s,%s, %s, %s)", passenger_detail_list_of_tuple)
-        inserted = self.conn.commit()
-        return inserted
+        self.conn.commit()
+        
 
-    def insert_pnr_details(self, pnr_list_value):
+    def insert_records_in_pnr_details(self, pnr_list_value):
         self.cur.execute("insert into pnr_details(pnr_id, pnr_number) values(uuid_generate_v4(), %s)", (pnr_list_value))
-        insert_pnr = self.conn.commit()
-        return insert_pnr
+        self.conn.commit()
 
-    def insert_booking_details_database(self, U_id):
+    def insert_records_in_booking_details(self, U_id):
         self.cur.executemany("insert into booking_details(passenger_uid, t_id, pnr_id) values(%s, %s, %s)", U_id)
-        insert_booking_details = self.conn.commit()
-        return insert_booking_details
+        self.conn.commit()
 
     def select_all_from_user_details(self, uuid):
         """
@@ -146,22 +144,20 @@ class Database:
         self.cur.execute(
             "delete from user_details where pnr_number in (%s)", ([
                 pnr_no]))
-        deleted_user_records = self.conn.commit()
-        return deleted_user_records
+        self.conn.commit()
 
     def delete_row_from_booking_details(self, pnr_id):
         self.cur.execute(
             "delete from booking_details where pnr_id in (%s)", ([
                 pnr_id]))
-        deleted_booking_records = self.conn.commit()
-        return deleted_booking_records
+        self.conn.commit()
 
     def delete_row_from_pnr_details(self, pnr_id):
         self.cur.execute(
             "delete from pnr_details where pnr_id in (%s)", ([
                 pnr_id]))
-        deleted_records_from_pnr_details = self.conn.commit()
-        return deleted_records_from_pnr_details
+        self.conn.commit()
+        
 
     def update_seats_in_traindetail(self, avail_seat, train_id):
         incrementby1 = 1
@@ -169,8 +165,7 @@ class Database:
             "update train_details set avail_seats = %s + %s where t_id = %s", ([
                 avail_seat, incrementby1, train_id
             ]))
-        seat_updated = self.conn.commit()
-        return seat_updated
+        self.conn.commit()
 
     def pnr_of_pnr_status(self, pnr_nos):
 
@@ -192,10 +187,10 @@ if __name__ == "__main__":
     db.get_pnr_id_from_pnr_details([(1621751452546704,)])
     db.generate_uuid_for_user_details()
     db.get_avail_seats_using_train_no(12110)
-    db.update_available_seat_in_train_detail(45, 12110)
+    db.update_available_seat_in_train_details(45, 12110)
     db.insert_records_in_user_detail([(str(myuuid), 'sunovada', 19, 'sunovada21@gmail.com', 821952,)])
-    db.insert_pnr_details([(43073875292983,)])
-    db.insert_booking_details_database(U_id)
+    db.insert_records_in_pnr_details([(43073875292983,)])
+    db.insert_records_in_booking_details(U_id)
     db.select_all_from_user_details(uuid)
     db.check_person_is_present('san', 19, 'san21@gmail.com', 983452)
     db.all_from_pnr_details(1621751452546704)
