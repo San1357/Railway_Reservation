@@ -21,11 +21,10 @@ class CancelTicket():
         print("pnr_details:", pnr_details)
         print("train_details:", train_details)
         print("booking_details:", booking_details)
-        print("type_of_pnr_details:",type(pnr_details), "type_of_booking_details:", type(booking_details), "type_of_train_details:", type(train_details))
+        print("type_of_pnr_details:", type(pnr_details), "type_of_booking_details:", type(booking_details), "type_of_train_details:", type(train_details))
         print("pnr_id:", pnr_details[0], "train_id:", booking_details[1], "avail_seat", train_details[5])
         print("Your Ticket is  Cancelled!!!")
         print("ThankYou !! Visit Again!! ")
-        self.pnr_no
 
 
 if __name__ == "__main__":
