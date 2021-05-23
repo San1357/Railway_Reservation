@@ -60,7 +60,7 @@ class MultipleBooking:
                 print("is_present:", is_present)
                 print("passenger_record:", passenger_record)
             else:
-                self.uuid = self.db.set_passenger_uid_for_user_details()
+                self.uuid = self.db.generate_uuid_for_user_details()
                 passenger_details_tuple = self.uuid + (name, age, email, aadhaar_no,)
                 passenger_detail_list_of_tuple.append(passenger_details_tuple)
                 self.db.insert_records_in_user_detail(passenger_detail_list_of_tuple)
