@@ -11,13 +11,33 @@ req_json = {
                         [
 
                             {
-                                "name": "adii",
-                                "email": "adii105@gmail.com",
+                                "name": "adiii",
+                                "email": "adiii105@gmail.com",
                                 "age": 19,
-                                "aadhaar_no": 123455
+                                "aadhaar_no": 124465
                             }
                         ]
             }
+
+def pnr_generator(no_of_seat):
+    ct = datetime.datetime.now()
+
+    pnr_list_value_as_tuple = ()
+    pnr_list_value = []
+    generating_pnr = int((ct.timestamp() * 1000000))
+
+    for pnr in range(0, no_of_seat):
+        emptytuple = ()
+        pnr = (pnr + generating_pnr)
+        pnr_list_value_as_tuple = emptytuple + (pnr,)
+        pnr_list_value.append(pnr_list_value_as_tuple)
+        print("generated pnr:", pnr)
+        print("PNR Number(in tuple form):", pnr_list_value_as_tuple)
+
+    print("Pnr Number(in List of tuple form) :", pnr_list_value)
+    print("Your PNR NUMBER IS:", pnr_list_value)
+    return pnr_list_value
+
 
 
 class MultipleBooking:
@@ -73,27 +93,10 @@ class MultipleBooking:
         print("Passenger_detail_list:", passenger_detail_list_of_tuple)
         print(type(passenger_detail_list_of_tuple))
 
-    def pnr_generator(self):
-        ct = datetime.datetime.now()
-
-        pnr_list_value_as_tuple = ()
-        self.pnr_list_value = []
-        generating_pnr = int((ct.timestamp() * 1000000))
-
-        for pnr in range(0, self.no_of_seat):
-            emptytuple = ()
-            pnr = (pnr + generating_pnr)
-            pnr_list_value_as_tuple = emptytuple + (pnr,)
-            self.pnr_list_value.append(pnr_list_value_as_tuple)
-            print("generated pnr:", pnr)
-            print("PNR Number(in tuple form):", pnr_list_value_as_tuple)
-
-        print("Pnr Number(in List of tuple form) :", self.pnr_list_value)
-        print("Your PNR NUMBER IS:", self.pnr_list_value)
-
     def booking_ticket(self):
         u_id = []
         uu_id = ()
+        self.pnr_list_value = pnr_generator(self.no_of_seat)
         self.db.insert_records_in_pnr_details(self.pnr_list_value)
         train_id = self.db.get_train_id_from_traindetails(self.train_no)
         pnr_id = self.db.get_pnr_id_from_pnr_details(self.pnr_list_value)
@@ -140,13 +143,12 @@ class MultipleBooking:
                 "no_of_seat_booked": str(0)
             }
         print(result)
-        return jsonify(result)
+        # return jsonify(result)
 
 
 if __name__ == "__main__":
     ticket_booking_object = MultipleBooking()
     ticket_booking_object.parsing(req_json)
-    ticket_booking_object.pnr_generator()
     ticket_booking_object.booking_ticket()
     ticket_booking_object.book_seat()
     ticket_booking_object.create_response()
