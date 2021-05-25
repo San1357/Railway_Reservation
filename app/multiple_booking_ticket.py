@@ -1,15 +1,15 @@
 import datetime
+import uuid
 from flask import jsonify
 from database import Database
 db = Database()
-import uuid
+
 
 req_json = {
             "train_no": 12110,
             "no_of_seat": 1,
             "passenger":
                         [
-
                             {
                                 "name": "adiii",
                                 "email": "adiii105@gmail.com",
@@ -18,6 +18,7 @@ req_json = {
                             }
                         ]
             }
+
 
 def pnr_generator(no_of_seat):
     ct = datetime.datetime.now()
@@ -38,13 +39,16 @@ def pnr_generator(no_of_seat):
     print("Your PNR NUMBER IS:", pnr_list_value)
     return pnr_list_value
 
+
 seats = req_json['no_of_seat']
 train_number = req_json['train_no']
 message = "sorry this no of seat is not available. so, we cant book any seat."
 message2 = "Welcome! You are In."
 check_seat = db.get_avail_seats_using_train_no(train_number)
 
+
 class MultipleBooking:
+
     def __init__(self):
         self.db = Database()
 
@@ -117,10 +121,9 @@ class MultipleBooking:
         print("U_id:", u_id)
 
     def book_seat(self):
-        
+
         self.avail_seat = self.db.get_avail_seats_using_train_no(self.train_no)
         print("available seat:", self.avail_seat)
-
 
         if self.no_of_seat < self.avail_seat:
             self.avail_seat = self.avail_seat - self.no_of_seat
@@ -147,8 +150,8 @@ class MultipleBooking:
                 "no of seat booked": str(0)
             }
         print(result)
-        # return jsonify(result)
-    
+        return jsonify(result)
+
 
 if __name__ == "__main__":
     if req_json['no_of_seat'] <= check_seat:
@@ -163,6 +166,5 @@ if __name__ == "__main__":
                 "seat available": str(check_seat),
                 "status": message,
                 "no of seat booked": str(0)
-                
             }
         print(result)
