@@ -151,11 +151,18 @@ class MultipleBooking:
     
 
 if __name__ == "__main__":
-    
-    ticket_booking_object = MultipleBooking()
-    ticket_booking_object.parsing(req_json)
-    ticket_booking_object.booking_ticket()
-    ticket_booking_object.book_seat()
-    ticket_booking_object.create_response()
-    
-        
+    if req_json['no_of_seat'] < check_seat:
+        ticket_booking_object = MultipleBooking()
+        ticket_booking_object.parsing(req_json)
+        ticket_booking_object.booking_ticket()
+        ticket_booking_object.book_seat()
+        ticket_booking_object.create_response()
+    else:
+        result = {
+                "no of seat you want": str(seats),
+                "seat available": str(check_seat),
+                "status": message,
+                "no of seat booked": str(0)
+                
+            }
+        print(result)
