@@ -151,7 +151,7 @@ class MultipleBooking:
     
 
 if __name__ == "__main__":
-    if req_json['no_of_seat'] < check_seat:
+    if req_json['no_of_seat'] <= check_seat:
         ticket_booking_object = MultipleBooking()
         ticket_booking_object.parsing(req_json)
         ticket_booking_object.booking_ticket()
