@@ -1,7 +1,7 @@
 import datetime
 from flask import jsonify
 from database import Database
-
+db = Database()
 import uuid
 
 req_json = {
@@ -38,7 +38,7 @@ def pnr_generator(no_of_seat):
     print("Your PNR NUMBER IS:", pnr_list_value)
     return pnr_list_value
 
-
+seats = req_json['no_of_seat']
 
 class MultipleBooking:
     def __init__(self):
@@ -134,21 +134,24 @@ class MultipleBooking:
             # a = 0
             result = {
                 "status": "booked",
-                "no_of_seat_booked": str(self.no_of_seat)
+                "no of seat booked": str(self.no_of_seat)
             }
 
         elif self.status == "False":
             result = {
                 "status": "not booked",
-                "no_of_seat_booked": str(0)
+                "no of seat booked": str(0)
             }
         print(result)
         # return jsonify(result)
-
+    
 
 if __name__ == "__main__":
+    
     ticket_booking_object = MultipleBooking()
     ticket_booking_object.parsing(req_json)
     ticket_booking_object.booking_ticket()
     ticket_booking_object.book_seat()
     ticket_booking_object.create_response()
+    
+        
