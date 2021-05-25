@@ -40,6 +40,8 @@ def pnr_generator(no_of_seat):
 
 seats = req_json['no_of_seat']
 train_number = req_json['train_no']
+message = "sorry this no of seat is not available. so, we cant book any seat."
+message2 = "Welcome! You are In."
 
 
 class MultipleBooking:
