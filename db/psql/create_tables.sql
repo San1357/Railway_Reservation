@@ -7,17 +7,13 @@ create table if not exists pnr_store(
 
 
 
--- Creation of passenger_details table
-create table if not exists passenger_details(
+-- Creation of user_details table
+create table if not exists user_details(
+    passenger_uid uuid NOT NULL primary key, 
     name varchar(30) NOT NULL,
-    email varchar(40) NOT NULL UNIQUE,
     age  int NOT NULL,
-    aadhaar_no int UNIQUE NOT NULL,
-    fromstation varchar(30) NOT NULL,
-    tostation varchar(20) NOT NULL,
-    class varchar(20) NOT NULL,
-    train_no int NOT NULL,
-    pnr_number bigint NOT NULL
+    email varchar(40) NOT NULL UNIQUE,
+    aadhaar_no int UNIQUE NOT NULL
 );
 
 -- Creation of train_detail table
