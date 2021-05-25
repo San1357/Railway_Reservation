@@ -42,7 +42,7 @@ seats = req_json['no_of_seat']
 train_number = req_json['train_no']
 message = "sorry this no of seat is not available. so, we cant book any seat."
 message2 = "Welcome! You are In."
-
+check_seat = db.get_avail_seats_using_train_no(train_number)
 
 class MultipleBooking:
     def __init__(self):
