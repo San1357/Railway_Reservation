@@ -17,12 +17,12 @@ create table if not exists user_details(
 );
 
 -- Creation of train_detail table
-create table if not exists traindetail(
-    fromstation varchar(20) NOT NULL,
-    tostation varchar(20) NOT NULL,
+create table if not exists train_details(
+    t_id uuid NOT NULL primary key,
+    from_station varchar(30) NOT NULL,
+    to_station varchar(30) NOT NULL,
     train_no int NOT NULL,
-    train_name varchar(50),
-    total_seat int NOT NULL,
-    avail_seat int NOT NULL,
-    trainschedule TEXT
+    total_seats int NOT NULL,
+    avail_seats int NOT NULL,
+    train_schedule TEXT
 );
