@@ -7,7 +7,6 @@ insert into pnr_store (pnr_no, status, pnrpresentstatus) values (7934082101, 'co
 
 insert into user_details (passenger_uid, name, age, email, aadhaar_no) values (uuid_generate_v4(), 'jeet', 19, 'jeet105@gmail.com', 1491041);
 
-
 --insert into train_details table 
 
 
@@ -21,3 +20,7 @@ values (uuid_generate_v4(), 'Pune', 'Gorakhpur', 12345, 200, 19, '{GORAKHPUR_JN,
 
 insert into pnr_details (pnr_id, pnr_number) values (uuid_generate_v4(), 1612344455854958);
 
+
+--insert into booking_details table 
+
+insert into booking_details (passenger_uid, t_id, pnr_id) values (uuid_generate_v4(), uuid_generate_v4, uuid_generate_v4());
