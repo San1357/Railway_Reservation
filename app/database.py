@@ -77,12 +77,10 @@ class Database:
         self.cur.execute("update Train_details set avail_seats = %s where train_no = %s", (
             avail_seat, train_no))
         self.conn.commit()
-        
 
     def insert_records_in_user_detail(self, passenger_detail_list_of_tuple):
         self.cur.executemany("insert into user_details(passenger_uid, name, age, email, aadhaar_no)values(%s, %s,%s, %s, %s)", passenger_detail_list_of_tuple)
         self.conn.commit()
-        
 
     def insert_records_in_pnr_details(self, pnr_list_value):
         self.cur.execute("insert into pnr_details(pnr_id, pnr_number) values(uuid_generate_v4(), %s)", (pnr_list_value))
@@ -151,7 +149,6 @@ class Database:
             "delete from pnr_details where pnr_id in (%s)", ([
                 pnr_id]))
         self.conn.commit()
-        
 
     def update_seats_in_train_details(self, avail_seat, train_id):
         incrementby1 = 1
