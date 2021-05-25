@@ -153,7 +153,7 @@ class Database:
         self.conn.commit()
         
 
-    def update_seats_in_traindetail(self, avail_seat, train_id):
+    def update_seats_in_train_details(self, avail_seat, train_id):
         incrementby1 = 1
         self.cur.execute(
             "update train_details set avail_seats = %s + %s where t_id = %s", ([
