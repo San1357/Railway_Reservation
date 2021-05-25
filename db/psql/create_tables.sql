@@ -26,3 +26,9 @@ create table if not exists train_details(
     avail_seats int NOT NULL,
     train_schedule TEXT
 );
+
+--Creation of pnr_details table
+create table if not exists pnr_details(
+    pnr_id uuid NOT NULL primary key,
+    pnr_number bigint NOT NULL UNIQUE
+);
