@@ -15,7 +15,7 @@ class CancelTicket():
         self.db.delete_row_from_booking_details(pnr_id)
         self.db.delete_row_from_pnr_details(pnr_id)
         avail_seat = train_details[5]
-        self.db.update_seats_in_traindetail(avail_seat, t_id)
+        self.db.update_seats_in_train_details(avail_seat, t_id)
         print("Pnr_no:", pnr_no)
         print("pnr_details:", pnr_details)
         print("train_details:", train_details)
