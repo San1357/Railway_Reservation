@@ -39,6 +39,8 @@ def pnr_generator(no_of_seat):
     return pnr_list_value
 
 seats = req_json['no_of_seat']
+train_number = req_json['train_no']
+
 
 class MultipleBooking:
     def __init__(self):
