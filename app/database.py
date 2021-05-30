@@ -60,10 +60,10 @@ class Database:
 
     def generate_uuid_for_user_details(self):
         self.cur.execute("SELECT uuid_generate_v4(); ")
-        generated_passenger_uid = self.cur.fetchone()
+        generated_passenger_uuid = self.cur.fetchone()
         print("------------generating_passenger_uid----------")
-        print("generate_passenger_uid:", generated_passenger_uid)
-        return generated_passenger_uid
+        print("generate_passenger_uid:", generated_passenger_uuid)
+        return generated_passenger_uuid
 
     def get_avail_seats_using_train_no(self, train_no):
         self.cur.execute("select * from Train_details where train_no = %s", ([
