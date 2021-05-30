@@ -3,7 +3,6 @@ import pprint
 from multiple_booking_ticket import MultipleBooking
 from train_search import Search
 from cancel_ticket import CancelTicket
-from pnr_status_check import PnrChecker
 
 
 app = Flask(__name__)
