@@ -174,8 +174,8 @@ if __name__ == "__main__":
     uuid = 'b6f9bcd7-400a-4b7e-a21b-b87c6f8e77fc'
     db = Database()
     db.get_all_from_train_details("gkp", "pune")
-    db.get_train_id_from_traindetails(12110)
-    db.get_pnr_id_from_pnr_details([(1621751452546704,)])
+    db.get_train_uuid_from_traindetails(12110)
+    db.get_pnr_uuid_from_pnr_details([(1621751452546704,)])
     db.generate_uuid_for_user_details()
     db.get_avail_seats_using_train_no(12110)
     db.update_available_seat_in_train_details(45, 12110)
