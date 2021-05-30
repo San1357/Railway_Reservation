@@ -87,7 +87,7 @@ class MultipleBooking:
                 passenger_detail_list_of_tuple.append(passenger_details_in_form_of_tuple)
                 self.db.insert_records_in_user_detail(passenger_detail_list_of_tuple)
                 print("created uuid for new passenger_record", self.uuid)
-                print("passenger_detail_tuple :", passenger_details_in_form_of_tuple)
+                print("passenger_detail_in_form_of_tuple :", passenger_details_in_form_of_tuple)
                 print("Data type of Passenger detail:", type(passenger_details_in_form_of_tuple))
 
             print("is_present:", is_passenger_detail_present, "UUID: ", self.uuid)
@@ -98,10 +98,10 @@ class MultipleBooking:
     def booking_ticket(self):
         u_id = []
         uu_id = ()
-        self.pnr_list_value = pnr_generator(self.no_of_seat)
-        self.db.insert_records_in_pnr_details(self.pnr_list_value)
+        self.pnr_list_in_form_of_list = pnr_generator(self.no_of_seat)
+        self.db.insert_records_in_pnr_details(self.pnr_list_in_form_of_list)
         train_id = self.db.get_train_id_from_traindetails(self.train_no)
-        pnr_id = self.db.get_pnr_id_from_pnr_details(self.pnr_list_value)
+        pnr_id = self.db.get_pnr_id_from_pnr_details(self.pnr_list_in_form_of_list)
         uu_id = (self.uuid,) + train_id + pnr_id
         u_id.append(uu_id)
         self.db.insert_records_in_booking_details(u_id)
