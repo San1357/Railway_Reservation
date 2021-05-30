@@ -21,10 +21,7 @@ def multiple_bookings_api():
         pprint.pprint(req_json)  # pprint will print your response in response json format.
 
         ticket_booking = MultipleBooking()
-        ticket_booking.parsing(req_json)
-        ticket_booking.book_seat()
-
-        response = ticket_booking.create_response()
+        response = ticket_booking.main_funcn(req_json)
         return response
 
 
