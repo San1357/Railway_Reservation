@@ -73,24 +73,24 @@ class MultipleBooking:
             aadhaar_no = pass_detail['aadhaar_no']
             print('name:', name, 'age : ', age, 'email:', email, 'aadhaar_no:', aadhaar_no)
 
-            is_passenger_detail_present, self.uuid = self.db.check_person_is_present(name, age, email, aadhaar_no)
+            is_passenger_detail_present, self.passenger_uuid = self.db.check_person_is_present(name, age, email, aadhaar_no)
 
             if is_passenger_detail_present:
-                passenger_record = self.db.select_all_from_user_details(self.uuid)
+                passenger_record = self.db.select_all_from_user_details(self.passenger_uuid)
                 passenger_detail_list_of_tuple.append(passenger_record)
-                print("UUID exist", self.uuid)
+                print("UUID exist", self.passenger_uuid)
                 print("is_present:", is_passenger_detail_present)
                 print("passenger_record:", passenger_record)
             else:
-                self.uuid = self.db.generate_uuid_for_user_details()
-                passenger_details_in_form_of_tuple = self.uuid + (name, age, email, aadhaar_no,)
+                self.passenger_uuid = self.db.generate_uuid_for_user_details()
+                passenger_details_in_form_of_tuple = self.passenger_uuid + (name, age, email, aadhaar_no,)
                 passenger_detail_list_of_tuple.append(passenger_details_in_form_of_tuple)
                 self.db.insert_records_in_user_detail(passenger_detail_list_of_tuple)
-                print("created uuid for new passenger_record", self.uuid)
+                print("created uuid for new passenger_record", self.passenger_uuid)
                 print("passenger_detail_in_form_of_tuple :", passenger_details_in_form_of_tuple)
                 print("Data type of Passenger detail:", type(passenger_details_in_form_of_tuple))
 
-            print("is_present:", is_passenger_detail_present, "UUID: ", self.uuid)
+            print("is_present:", is_passenger_detail_present, "UUID: ", self.passenger_uuid)
             print("-----------------final list ---------------")
         print("Passenger_detail_list:", passenger_detail_list_of_tuple)
         print(type(passenger_detail_list_of_tuple))
@@ -102,15 +102,15 @@ class MultipleBooking:
         self.db.insert_records_in_pnr_details(self.pnr_list)
         train_uuid = self.db.get_train_id_from_traindetails(self.train_no)
         pnr_uuid = self.db.get_pnr_id_from_pnr_details(self.pnr_list)
-        uu_id = (self.uuid,) + train_id + pnr_id
+        uu_id = (self.passenger_uuid,) + train_id + pnr_id
         u_id.append(uu_id)
         self.db.insert_records_in_booking_details(u_id)
         print("Train_id:", train_id)
         print("type of Train_id:", type(train_uuid))
         print(":PNR_ID", pnr_id)
         print("type of PNR_ID", type(pnr_uuid))
-        print("PASSENGER_ID:", self.uuid)
-        print("type of PASSENGER_ID:", type(uuid,))
+        print("PASSENGER_ID:", self.passenger_uuid)
+        print("type of PASSENGER_ID:", type(self.passenger_uuid,))
         print("uuid:", uu_id)
         print("U_id:", u_id)
 
