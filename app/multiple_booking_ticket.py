@@ -61,6 +61,8 @@ class MultipleBooking:
         print("Data Type of Train_no:", type(self.train_no))
         print("no of Seat :", self.no_of_seat)
 
+    def is_passenger_detail_exist(self): 
+
         print("-----------passenger_details(list_of_tuple)-------------------")
         passenger_detail_list_of_tuple = []
         for pass_detail in passenger_details:
