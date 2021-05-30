@@ -99,8 +99,8 @@ class MultipleBooking:
         uu_id = ()
         self.pnr_list = pnr_generator(self.no_of_seat)
         self.db.insert_records_in_pnr_details(self.pnr_list)
-        train_uuid = self.db.get_train_id_from_traindetails(self.train_no)
-        pnr_uuid = self.db.get_pnr_id_from_pnr_details(self.pnr_list)
+        train_uuid = self.db.get_train_uuid_from_traindetails(self.train_no)
+        pnr_uuid = self.db.get_pnr_uuid_from_pnr_details(self.pnr_list)
         uu_id = (self.passenger_uuid,) + train_uuid + pnr_uuid
         u_id.append(uu_id)
         self.db.insert_records_in_booking_details(u_id)
