@@ -49,14 +49,6 @@ class CancelTicket():
                     "status": "pnr doesnt exist",
                 }
         print(result)
-        
-    
-    
-    
-
-
-
-
 
 
 if __name__ == "__main__":
@@ -64,4 +56,3 @@ if __name__ == "__main__":
     ticket_cancel.enter_pnr_no(1622362531927666)
     ticket_cancel.check_pnr_exist_or_not()
     ticket_cancel.response_of_pnr()
-    
