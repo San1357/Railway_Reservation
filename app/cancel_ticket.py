@@ -14,7 +14,6 @@ class CancelTicket():
 
     def get_cancel_ticket(self):
         print("pnr:", self.pnr_no)
-        # self.pnr_details = self.db.all_from_pnr_details(self.pnr_no)
         pnr_uuid = self.pnr_details[0]
         booking_details = self.db.all_from_booking_details(pnr_uuid)
         train_uuid = booking_details[1]
@@ -31,6 +30,12 @@ class CancelTicket():
         print("pnr_id:", self.pnr_details[0], "train_id:", booking_details[1], "avail_seat", train_details[5])
         print("Your Ticket is  Cancelled!!!")
         print("ThankYou !! Visit Again!! ")
+
+    def check_pnr_exist_or_not(self):
+        if self.pnr_no not in self.pnr_details:
+            self.status = "False"
+        else:
+            self.status = "True"
         
     
     
