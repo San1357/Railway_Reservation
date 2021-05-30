@@ -40,7 +40,7 @@ class Search():
         print("total no of seat:", self.train_details_info[4])
         print("available seat: ", self.train_details_info[5])
 
-    def get_train_Details(self):
+    def train_details_response(self):
 
         if self.train_details_info is not None:
             if self.train_details_info[1] == self.from_station and self.train_details_info[2] == self.to_station:
@@ -77,7 +77,9 @@ if __name__ == "__main__":
     search_train_object = Search()
     print("---------------train_Search()--------------")
     search_train_object.train_search("gkp", "pune", "12-03-2021")
-    print("---------------get_train_Details()--------------")
+    print("---------------get_train_details()--------------")
     search_train_object.get_train_details()
+    print("--------------response of train details -----------")
+    search_train_object.train_details_response()
     print("---------------Train_Schedule()--------------")
     search_train_object.train_schedule()
