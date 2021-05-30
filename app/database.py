@@ -48,15 +48,15 @@ class Database:
 
     def get_train_uuid_from_traindetails(self, train_no):
         self.cur.execute("select t_id from Train_details where train_no = %s", ([train_no]))
-        train_id = (self.cur.fetchone())
-        print("Train_id:", train_id)
-        return train_id
+        train_uuid = (self.cur.fetchone())
+        print("Train_id:", train_uuid)
+        return train_uuid
 
     def get_pnr_id_from_pnr_details(self, pnr_list_value):
         self.cur.execute("select pnr_id from pnr_details where pnr_number = %s", pnr_list_value)
-        pnr_id = (self.cur.fetchone())
-        print("pnr_id:", pnr_id)
-        return pnr_id
+        pnr_uuid = (self.cur.fetchone())
+        print("pnr_id:", pnr_uuid)
+        return pnr_uuid
 
     def generate_uuid_for_user_details(self):
         self.cur.execute("SELECT uuid_generate_v4(); ")
