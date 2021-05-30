@@ -1,5 +1,5 @@
 import datetime
-import uuid
+# import uuid
 from flask import jsonify
 from database import Database
 db = Database()
@@ -7,7 +7,7 @@ db = Database()
 
 req_json = {
             "train_no": 12110,
-            "no_of_seat": 1,
+            "no_of_seat": 100,
             "passenger":
                         [
                             {
@@ -21,10 +21,10 @@ req_json = {
 
 
 def pnr_generator(no_of_seat):
+
     ct = datetime.datetime.now()
-    
-    pnr_list_in_form_of_tuple = ()#pnr_list_value_as_tuple = ()
-    pnr_list = [] #pnr_list_value = []
+    pnr_list_in_form_of_tuple = ()  # pnr_list_value_as_tuple = ()
+    pnr_list = []  # pnr_list_value = []
     generating_pnr = int((ct.timestamp() * 1000000))
 
     for pnr in range(0, no_of_seat):
@@ -40,7 +40,6 @@ def pnr_generator(no_of_seat):
     return pnr_list
 
 
-
 class MultipleBooking:
 
     def __init__(self):
@@ -52,20 +51,20 @@ class MultipleBooking:
         self.train_no = 0
         request = req_json
 
-        passenger_details = request['passenger']
+        self.passenger_details = request['passenger']
         self.train_no = request['train_no']
         self.no_of_seat = request['no_of_seat']
-        print("passenger:", passenger_details)
+        print("passenger:", self.passenger_details)
         print("--------------------------------")
         print("Train_No:", self.train_no)
         print("Data Type of Train_no:", type(self.train_no))
         print("no of Seat :", self.no_of_seat)
 
-    def is_passenger_detail_exist(self): 
+    def is_passenger_detail_exist(self):
 
         print("-----------passenger_details(list_of_tuple)-------------------")
         passenger_detail_list_of_tuple = []
-        for pass_detail in passenger_details:
+        for pass_detail in self.passenger_details:
 
             name = pass_detail['name']
             age = pass_detail['age']
@@ -102,14 +101,14 @@ class MultipleBooking:
         self.db.insert_records_in_pnr_details(self.pnr_list)
         train_uuid = self.db.get_train_id_from_traindetails(self.train_no)
         pnr_uuid = self.db.get_pnr_id_from_pnr_details(self.pnr_list)
-        uu_id = (self.passenger_uuid,) + train_id + pnr_id
+        uu_id = (self.passenger_uuid,) + train_uuid + pnr_uuid
         u_id.append(uu_id)
         self.db.insert_records_in_booking_details(u_id)
         print("-------- TRAIN_UUID --------")
-        print("Train_UUID:", train_id)
+        print("Train_UUID:", train_uuid)
         print("type of Train_UUID:", type(train_uuid))
         print("-------- PNR_UUID --------")
-        print(":PNR_UUID", pnr_id)
+        print(":PNR_UUID", pnr_uuid)
         print("type of PNR_UUID", type(pnr_uuid))
         print("-------- PASSENGER_UUID --------")
         print("PASSENGER_UUID:", self.passenger_uuid)
@@ -135,9 +134,7 @@ class MultipleBooking:
 
     def get_avail_seat(self):
         self.message = "sorry this no of seat is not available. so, we cant book any seat."
-        message2 = "Welcome! You are In."
         self.avail_seat = db.get_avail_seats_using_train_no(self.train_no)
-
 
     def create_response(self):
 
@@ -154,9 +151,8 @@ class MultipleBooking:
                     "no of seat booked": str(0)
                 }
             print(result)
-            #return jsonify(result)
+            return jsonify(result)
         else:
-            
             result = {
                 "no of seat you want": str(self.no_of_seat),
                 "seat available": str(self.avail_seat),
@@ -178,7 +174,7 @@ class MultipleBooking:
             self.status_two = True
         else:
             self.get_avail_seat()
-        self.create_response_mod()
+        self.create_response()
 
 
 if __name__ == "__main__":
