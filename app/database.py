@@ -121,10 +121,16 @@ class Database:
         return is_present, uuid
 
     def all_from_pnr_details(self, pnr_no):
-        self.cur.execute("select * from pnr_details where pnr_number = %s", ([pnr_no]))
-        pnr_details_info = list(self.cur.fetchone())
-        print("pnr_details_info:", pnr_details_info)
-        return pnr_details_info
+        self.cur.execute("select * from pnr_details where pnr_number = %s", (pnr_no))
+        pnr_details_info = self.cur.fetchone()
+        print(pnr_details_info)
+        empty = []
+        if pnr_details_info == None:
+            print("Pnr_details_info", empty)
+            return empty
+        else:
+            print("pnr_details_info:", pnr_details_info) 
+            return pnr_details_info
 
     def all_from_booking_details(self, pnr_uuid):
         self.cur.execute("select * from booking_details where pnr_id = %s", ([pnr_uuid]))
