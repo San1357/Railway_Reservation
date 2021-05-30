@@ -141,7 +141,7 @@ class Database:
     def delete_row_from_booking_details(self, pnr_uuid):
         self.cur.execute(
             "delete from booking_details where pnr_id in (%s)", ([
-                pnr_id]))
+                pnr_uuid]))
         self.conn.commit()
 
     def delete_row_from_pnr_details(self, pnr_uuid):
