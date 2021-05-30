@@ -183,4 +183,4 @@ class MultipleBooking:
 
 if __name__ == "__main__":
     ticket_booking_object = MultipleBooking()
-    ticket_booking_object.main_funcn_mod_mod(req_json)
+    ticket_booking_object.main_funcn(req_json)
