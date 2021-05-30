@@ -24,20 +24,20 @@ def pnr_generator(no_of_seat):
     ct = datetime.datetime.now()
     
     pnr_list_in_form_of_tuple = ()#pnr_list_value_as_tuple = ()
-    pnr_list_in_form_of_list = [] #pnr_list_value = []
+    pnr_list = [] #pnr_list_value = []
     generating_pnr = int((ct.timestamp() * 1000000))
 
     for pnr in range(0, no_of_seat):
         emptytuple = ()
         pnr = (pnr + generating_pnr)
         pnr_list_in_form_of_tuple = emptytuple + (pnr,)
-        pnr_list_in_form_of_list.append(pnr_list_in_form_of_tuple)
+        pnr_list.append(pnr_list_in_form_of_tuple)
         print("generated pnr:", pnr)
         print("PNR Number(in tuple form):", pnr_list_in_form_of_tuple)
 
-    print("Pnr Number(in List of tuple form) :", pnr_list_in_form_of_list)
-    print("Your PNR NUMBER IS:", pnr_list_in_form_of_list)
-    return pnr_list_in_form_of_list
+    print("Pnr Number(in List of tuple form) :", pnr_list)
+    print("Your PNR NUMBER IS:", pnr_list)
+    return pnr_list
 
 
 
@@ -98,7 +98,7 @@ class MultipleBooking:
     def booking_ticket(self):
         u_id = []
         uu_id = ()
-        self.pnr_list_in_form_of_list = pnr_generator(self.no_of_seat)
+        self.pnr_list = pnr_generator(self.no_of_seat)
         self.db.insert_records_in_pnr_details(self.pnr_list_in_form_of_list)
         train_id = self.db.get_train_id_from_traindetails(self.train_no)
         pnr_id = self.db.get_pnr_id_from_pnr_details(self.pnr_list_in_form_of_list)
