@@ -55,7 +55,7 @@ def cancel_ticket_api():
         cancel_ticket_object.check_pnr_exist_or_not()
         pnr_response = cancel_ticket_object.response_of_pnr()
 
-        return jsonify({"PNR Number": str(pnr_response), "Ticket Cancelled Status": True})
+        return jsonify(pnr_response)
 
 
 if __name__ == "__main__":
