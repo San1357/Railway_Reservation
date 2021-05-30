@@ -23,6 +23,7 @@ class Search():
         
         self.train_details_info = self.db.get_all_from_train_details(self.from_station, self.to_station)
 
+        print("----------------- train_details_info ------------------")
         print(self.train_details_info)
         print(type(self.train_details_info))
         print(type(self.train_details_info[0]))
@@ -31,7 +32,7 @@ class Search():
         print(type(self.train_details_info[3]))
         print(type(self.train_details_info[4]))
         print(type(self.train_details_info[5]))
-        print("t_id", self.train_details_info[0])
+        print("train_uuid", self.train_details_info[0])
         print("from station:", self.train_details_info[1])
         print("to station:", self.train_details_info[2])
         print("train no: ", self.train_details_info[3])
