@@ -73,13 +73,13 @@ class MultipleBooking:
             aadhaar_no = pass_detail['aadhaar_no']
             print('name:', name, 'age : ', age, 'email:', email, 'aadhaar_no:', aadhaar_no)
 
-            is_present, self.uuid = self.db.check_person_is_present(name, age, email, aadhaar_no)
+            is_passenger_detail_present, self.uuid = self.db.check_person_is_present(name, age, email, aadhaar_no)
 
-            if is_present:
+            if is_passenger_detail_present:
                 passenger_record = self.db.select_all_from_user_details(self.uuid)
                 passenger_detail_list_of_tuple.append(passenger_record)
                 print("UUID exist", self.uuid)
-                print("is_present:", is_present)
+                print("is_present:", is_passenger_detail_present)
                 print("passenger_record:", passenger_record)
             else:
                 self.uuid = self.db.generate_uuid_for_user_details()
