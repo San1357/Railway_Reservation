@@ -24,7 +24,7 @@ def pnr_generator(no_of_seat):
     ct = datetime.datetime.now()
 
     pnr_list_in_form_of_tuple = ()
-    pnr_list_value = []
+    pnr_list_in_form_of_list = []
     generating_pnr = int((ct.timestamp() * 1000000))
 
     for pnr in range(0, no_of_seat):
