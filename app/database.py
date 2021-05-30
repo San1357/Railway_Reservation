@@ -46,7 +46,7 @@ class Database:
         # print(Train_details)
         return train_details
 
-    def get_train_id_from_traindetails(self, train_no):
+    def get_train_uuid_from_traindetails(self, train_no):
         self.cur.execute("select t_id from Train_details where train_no = %s", ([train_no]))
         train_id = (self.cur.fetchone())
         print("Train_id:", train_id)
