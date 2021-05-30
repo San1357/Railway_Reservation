@@ -62,7 +62,7 @@ class Search():
     def train_schedule(self):
 
         if self.train_details_info is not None:
-            if self.train_details_info[1] == self. from_station and self.train_details_info[2] == self.to_station:
+            if self.train_details_info[1] == self.from_station and self.train_details_info[2] == self.to_station:
                 print("** Train Schedule **")
                 results = self.train_details_info[6]
                 print(results)
