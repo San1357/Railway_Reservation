@@ -1,5 +1,4 @@
 from database import Database
-from flask import jsonify
 
 
 class CancelTicket():
@@ -51,6 +50,7 @@ class CancelTicket():
                 }
         print(result)
         return result
+
 
 if __name__ == "__main__":
     ticket_cancel = CancelTicket()
