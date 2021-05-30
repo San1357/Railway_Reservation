@@ -52,10 +52,11 @@ def cancel_ticket_api():
         pnr_no = req_json['pnr_no']
         print(pnr_no)
         cancel_ticket_object = CancelTicket()
-        pnr_of_cancel_ticket = cancel_ticket_object.get_cancel_ticket(pnr_no)
-        print(str(pnr_of_cancel_ticket))
+        cancel_ticket_object.enter_pnr_no(pnr_no)
+        cancel_ticket_object.check_pnr_exist_or_not()
+        pnr_response = cancel_ticket_object.response_of_pnr()
 
-        return jsonify({"PNR Number": str(pnr_of_cancel_ticket), "Ticket Cancelled Status": True})
+        return jsonify({"PNR Number": str(pnr_response), "Ticket Cancelled Status": True})
 
 
 @app.route('/pnr_connect', methods=['POST'])
