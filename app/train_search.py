@@ -14,14 +14,14 @@ class Search():
         print("FROM: ", self.from_station)
         print("TO: ", self.to_station)
         print("Date: ", self.date)
-    
+
     def get_train_details(self):
         search_list = []
         search_list.append(self.from_station)
         search_list.append(self.to_station)
         search_list.append(self.date)
         print("search_list:", search_list)
-        
+
         self.train_details_info = self.db.get_all_from_train_details(self.from_station, self.to_station)
 
         print("----------------- train_details_info ------------------")
