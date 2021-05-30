@@ -51,8 +51,8 @@ def cancel_ticket_api():
         req_json = request.json
         pnr_no = req_json['pnr_no']
         print(pnr_no)
-        cancel_ticket_object = CancelTicket(pnr_no)
-        pnr_of_cancel_ticket = cancel_ticket_object.get_cancel_ticket()
+        cancel_ticket_object = CancelTicket()
+        pnr_of_cancel_ticket = cancel_ticket_object.get_cancel_ticket(pnr_no)
         print(str(pnr_of_cancel_ticket))
 
         return jsonify({"PNR Number": str(pnr_of_cancel_ticket), "Ticket Cancelled Status": True})
