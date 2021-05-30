@@ -160,6 +160,7 @@ class MultipleBooking:
                 "no of seat booked": str(0)
             }
             print(result)
+        return jsonify(result)
 
     def main_funcn(self, req_json):
 
@@ -174,7 +175,9 @@ class MultipleBooking:
             self.status_two = True
         else:
             self.get_avail_seat()
-        self.create_response()
+        return self.create_response()
+
+        # To DO : return
 
 
 if __name__ == "__main__":
