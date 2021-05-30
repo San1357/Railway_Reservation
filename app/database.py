@@ -52,7 +52,7 @@ class Database:
         print("Train_id:", train_uuid)
         return train_uuid
 
-    def get_pnr_id_from_pnr_details(self, pnr_list_value):
+    def get_pnr_uuid_from_pnr_details(self, pnr_list_value):
         self.cur.execute("select pnr_id from pnr_details where pnr_number = %s", pnr_list_value)
         pnr_uuid = (self.cur.fetchone())
         print("pnr_id:", pnr_uuid)
