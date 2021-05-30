@@ -126,35 +126,35 @@ class Database:
         print("pnr_details_info:", pnr_details_info)
         return pnr_details_info
 
-    def all_from_booking_details(self, pnr_id):
-        self.cur.execute("select * from booking_details where pnr_id = %s", ([pnr_id]))
+    def all_from_booking_details(self, pnr_uuid):
+        self.cur.execute("select * from booking_details where pnr_id = %s", ([pnr_uuid]))
         booking_details_info = list(self.cur.fetchone())
         print("booking_details_info:", booking_details_info)
         return booking_details_info
 
-    def all_from_train_details(self, t_id):
-        self.cur.execute("select * from train_details where t_id = %s", ([t_id]))
+    def all_from_train_details(self, train_uuid):
+        self.cur.execute("select * from train_details where t_id = %s", ([train_uuid]))
         train_details_record = list(self.cur.fetchone())
         print("train_details_record:", train_details_record)
         return train_details_record
 
-    def delete_row_from_booking_details(self, pnr_id):
+    def delete_row_from_booking_details(self, pnr_uuid):
         self.cur.execute(
             "delete from booking_details where pnr_id in (%s)", ([
                 pnr_id]))
         self.conn.commit()
 
-    def delete_row_from_pnr_details(self, pnr_id):
+    def delete_row_from_pnr_details(self, pnr_uuid):
         self.cur.execute(
             "delete from pnr_details where pnr_id in (%s)", ([
-                pnr_id]))
+                pnr_uuid]))
         self.conn.commit()
 
-    def update_seats_in_train_details(self, avail_seat, train_id):
+    def update_seats_in_train_details(self, avail_seat, train_uuid):
         incrementby1 = 1
         self.cur.execute(
             "update train_details set avail_seats = %s + %s where t_id = %s", ([
-                avail_seat, incrementby1, train_id
+                avail_seat, incrementby1, train_uuid
             ]))
         self.conn.commit()
 
