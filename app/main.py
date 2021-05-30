@@ -58,18 +58,5 @@ def cancel_ticket_api():
         return jsonify({"PNR Number": str(pnr_response), "Ticket Cancelled Status": True})
 
 
-@app.route('/pnr_connect', methods=['POST'])
-def pnrc_api():
-    if request.method == 'POST':
-        req_json = request.json
-        pnr_nos = req_json['pnr_nos']
-        response = PnrChecker()
-        json_ify = jsonify(response.pnr_connect(pnr_nos))
-
-        print(json_ify)
-        return json_ify
-    return jsonify({"response: Post Called"})
-
-
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000, debug=True)
