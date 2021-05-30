@@ -139,21 +139,31 @@ class MultipleBooking:
         self.avail_seat = db.get_avail_seats_using_train_no(self.train_no)
 
 
-    def create_response(self):
-        if self.status == "True":
-            # a = 0
-            result = {
-                "status": "booked",
-                "no of seat booked": str(self.no_of_seat)
-            }
+    def create_response_mod(self):
 
-        elif self.status == "False":
+        if self.status_two:
+            if self.status == "True":
+                result = {
+                    "status": "booked",
+                    "no of seat booked": str(self.no_of_seat)
+                }
+
+            elif self.status == "False":
+                result = {
+                    "status": "not booked",
+                    "no of seat booked": str(0)
+                }
+            print(result)
+            #return jsonify(result)
+        else:
+            
             result = {
-                "status": "not booked",
+                "no of seat you want": str(self.no_of_seat),
+                "seat available": str(self.avail_seat),
+                "status": self.message,
                 "no of seat booked": str(0)
             }
-        print(result)
-        return jsonify(result)
+            print(result)
 
 
 if __name__ == "__main__":
