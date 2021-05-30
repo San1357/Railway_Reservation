@@ -36,6 +36,19 @@ class CancelTicket():
             self.status = "False"
         else:
             self.status = "True"
+
+    def response_of_pnr(self):
+        if self.status == "True":
+            self.get_cancel_ticket()
+            result = {
+                    "status": "deleted",
+                    "no of seat booked": str(0)
+                }
+        elif self.status == "False":
+            result = {
+                    "status": "pnr doesnt exist",
+                }
+        print(result)
         
     
     
