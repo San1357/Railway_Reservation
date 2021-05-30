@@ -14,7 +14,8 @@ class Search():
         print("FROM: ", self.from_station)
         print("TO: ", self.to_station)
         print("Date: ", self.date)
-
+    
+    def get_train_details(self):
         search_list = []
         search_list.append(self.from_station)
         search_list.append(self.to_station)
@@ -39,7 +40,7 @@ class Search():
         print("total no of seat:", self.train_details_info[4])
         print("available seat: ", self.train_details_info[5])
 
-    def get_train_details(self):
+    def get_train_Details(self):
 
         if self.train_details_info is not None:
             if self.train_details_info[1] == self.from_station and self.train_details_info[2] == self.to_station:
