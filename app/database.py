@@ -125,11 +125,11 @@ class Database:
         pnr_details_info = self.cur.fetchone()
         print(pnr_details_info)
         empty = []
-        if pnr_details_info == None:
+        if pnr_details_info is None:
             print("Pnr_details_info", empty)
             return empty
         else:
-            print("pnr_details_info:", pnr_details_info) 
+            print("pnr_details_info:", pnr_details_info)
             return pnr_details_info
 
     def all_from_booking_details(self, pnr_uuid):
