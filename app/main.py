@@ -41,7 +41,7 @@ def search_api():
         response_of_train = train_search_object.train_details_response()
         schedule_of_train = train_search_object.train_schedule()
         print(detail_of_train)
-        return jsonify({"Your Details are": detail_of_train, "response ": response_of_train,  "Train Schedule are": schedule_of_train})
+        return jsonify({"Your Details are": detail_of_train, "response ": response_of_train, "Train Schedule are": schedule_of_train})
 
 
 @app.route('/_cancel_ticket', methods=['POST'])
