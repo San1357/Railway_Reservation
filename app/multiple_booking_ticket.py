@@ -132,7 +132,7 @@ class MultipleBooking:
 
     def get_avail_seat(self):
         self.message = "sorry this no of seat is not available. so, we cant book any seat."
-        self.avail_seat = db.get_avail_seats_using_train_no(self.train_no)
+        self.avail_seat = self.db.get_avail_seats_using_train_no(self.train_no)
 
     def create_response(self):
 
