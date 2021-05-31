@@ -5,18 +5,17 @@ from database import Database
 db = Database()
 
 
-req_json = {
-            "train_no": 12110,
+req_json = {"train_no": 12110,
             "no_of_seat": 100,
             "passenger":
-                        [
-                            {
-                                "name": "adiii",
-                                "email": "adiii105@gmail.com",
-                                "age": 19,
-                                "aadhaar_no": 124465
-                            }
-                        ]
+                [
+                    {
+                        "name": "adiii",
+                        "email": "adiii105@gmail.com",
+                        "age": 19,
+                        "aadhaar_no": 124465
+                    }
+                ]
             }
 
 
