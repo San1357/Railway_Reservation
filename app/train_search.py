@@ -43,7 +43,6 @@ class Search():
             print("available seat: ", self.train_details_info[5])
 
     def train_details_response(self):
-        
         message = "sorry either the info is not available in our database or either you typed wrong"
         if self.train_details_info is not None:
             print("** Here is your Train detail **")
@@ -60,7 +59,7 @@ class Search():
             result = {
                 "Train_Id": "did not found",
                 "Train_No": "didnt exist",
-                "status" : message
+                "status": message
             }
             print(result)
         return result
@@ -76,7 +75,7 @@ class Search():
                 print(i)
         else:
             results = {
-                "status" : "The train detail you entered is not exist in our database."
+                "status": "The train detail you entered is not exist in our database."
             }
             print(results)
         return results
