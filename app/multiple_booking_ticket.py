@@ -2,11 +2,10 @@ import datetime
 # import uuid
 from flask import jsonify
 from database import Database
-db = Database()
 
 
 req_json = {"train_no": 12110,
-            "no_of_seat": 100,
+            "no_of_seat": 1,
             "passenger":
                 [
                     {
@@ -164,7 +163,7 @@ class MultipleBooking:
     def main_funcn(self, req_json):
 
         self.parsing(req_json)
-        avail_seat = db.get_avail_seats_using_train_no(self.train_no)
+        avail_seat = self.db.get_avail_seats_using_train_no(self.train_no)
 
         self.status_two = False
         if self.no_of_seat <= avail_seat:
