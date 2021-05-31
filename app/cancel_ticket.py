@@ -41,13 +41,13 @@ class CancelTicket():
         if self.status == "True":
             self.get_cancel_ticket()
             result = {
-                    "status": "deleted",
-                    "no of seat booked": str(0)
-                }
+                "status": "deleted",
+                "no of seat booked": str(0)
+            }
         elif self.status == "False":
             result = {
-                    "status": "pnr doesnt exist",
-                }
+                "status": "pnr doesnt exist",
+            }
         print(result)
         return result
 
