@@ -42,7 +42,7 @@ class Database:
         self.cur.execute(
             "select * from Train_details where from_station = %s and to_station = %s",
             (fromstation, tostation))
-        train_details = list(self.cur.fetchone())
+        train_details = self.cur.fetchone()
         # print(Train_details)
         return train_details
 
