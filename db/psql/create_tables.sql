@@ -1,11 +1,6 @@
--- Creation of pnr_store table 
-create table if not exists pnr_store(
-    pnr_no numeric(30) NOT NULL,
-    status varchar(30) NOT NULL,
-    pnrpresentstatus varchar(20) NOT NULL
-);
+---it will create extension so that you can use uuid_generate_v4()
 
-
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 -- Creation of user_details table
 create table if not exists user_details(
@@ -35,7 +30,7 @@ create table if not exists pnr_details(
 
 --Creation of booking_details table 
 create table if not exists booking_details(
-    passenger_uid uuid References user_details(passenger_uid),
-    t_id uuid References train_details(t_id),
-    pnr_id References pnr_details(pnr_id)
+    passenger_uid uuid REFERENCES user_details(passenger_uid),
+    t_id uuid REFERENCES train_details(t_id),
+    pnr_id uuid REFERENCES pnr_details(pnr_id)
 );
