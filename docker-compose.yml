@@ -3,16 +3,16 @@ services:
   flask:
     build: ./app/.
     depends_on:
-      - Database
+      - database
     ports:
       - 5000:5000
 
-  Database:
+  database:
     image: postgres:10.5
     restart: always
     environment: 
-      - POSTGRES_USER=My_Database
-      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=database
+      - POSTGRES_PASSWORD=database
     logging:
       options:
         max-size: 10m
