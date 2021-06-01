@@ -26,10 +26,10 @@ def pnr_generator(no_of_seat):
 class Database:
 
     def __init__(self):
-        db_host = "localhost"
-        db_name = "myfirstdatabase"
-        db_user = "postgres"
-        db_pass = "password"
+        db_host = "database"
+        db_name = "database"
+        db_user = "database"
+        db_pass = "database"
 
         self.conn = psycopg2.connect(
             host=db_host,
