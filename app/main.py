@@ -3,7 +3,6 @@ import pprint
 from multiple_booking_ticket import MultipleBooking
 from train_search import Search
 from cancel_ticket import CancelTicket
-from pnr_status_check import PnrChecker
 
 
 app = Flask(__name__)
@@ -21,10 +20,7 @@ def multiple_bookings_api():
         pprint.pprint(req_json)  # pprint will print your response in response json format.
 
         ticket_booking = MultipleBooking()
-        ticket_booking.parsing(req_json)
-        ticket_booking.book_seat()
-
-        response = ticket_booking.create_response()
+        response = ticket_booking.main_funcn(req_json)
         return response
 
 
@@ -39,12 +35,13 @@ def search_api():
         date = req_json['date']
         print(date)
 
-        train_search_object = Search(from_station, to_station, date)
-        train_search_object.train_search()
+        train_search_object = Search()
+        train_search_object.train_search(from_station, to_station, date)
         detail_of_train = train_search_object.get_train_details()
+        response_of_train = train_search_object.train_details_response()
         schedule_of_train = train_search_object.train_schedule()
         print(detail_of_train)
-        return jsonify({"Your Details are": detail_of_train, "Train Schedule are": schedule_of_train})
+        return jsonify({"Your Details are": detail_of_train, "response ": response_of_train, "Train Schedule are": schedule_of_train})
 
 
 @app.route('/_cancel_ticket', methods=['POST'])
@@ -53,24 +50,12 @@ def cancel_ticket_api():
         req_json = request.json
         pnr_no = req_json['pnr_no']
         print(pnr_no)
-        cancel_ticket_object = CancelTicket(pnr_no)
-        pnr_of_cancel_ticket = cancel_ticket_object.get_cancel_ticket()
-        print(str(pnr_of_cancel_ticket))
+        cancel_ticket_object = CancelTicket()
+        cancel_ticket_object.enter_pnr_no(pnr_no)
+        cancel_ticket_object.check_pnr_exist_or_not()
+        pnr_response = cancel_ticket_object.response_of_pnr()
 
-        return jsonify({"PNR Number": str(pnr_of_cancel_ticket), "Ticket Cancelled Status": True})
-
-
-@app.route('/pnr_connect', methods=['POST'])
-def pnrc_api():
-    if request.method == 'POST':
-        req_json = request.json
-        pnr_nos = req_json['pnr_nos']
-        response = PnrChecker()
-        json_ify = jsonify(response.pnr_connect(pnr_nos))
-
-        print(json_ify)
-        return json_ify
-    return jsonify({"response: Post Called"})
+        return jsonify(pnr_response)
 
 
 if __name__ == "__main__":
